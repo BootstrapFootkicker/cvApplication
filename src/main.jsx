@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
+import App from './components/App.jsx'
 import './index.css'
+import PersonalDetails from "./components/PersonalDetails.jsx";
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    {/*<App />*/}
+      <PersonalDetails />
   </React.StrictMode>,
 )
