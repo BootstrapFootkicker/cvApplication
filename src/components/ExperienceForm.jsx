@@ -24,7 +24,6 @@ function ExperienceForm() {
             onChange={(e) => setCompanyName(e.target.value)}
           ></input>
         </div>
-
         <div className={"input-group"}>
           <label htmlFor="position">Position</label>
           <input
@@ -36,7 +35,6 @@ function ExperienceForm() {
             onChange={(e) => setPosition(e.target.value)}
           ></input>
         </div>
-
         <div className="date-container">
           <div className={"input-group"}>
             <label htmlFor="startDate">Start Date</label>
@@ -62,7 +60,6 @@ function ExperienceForm() {
             ></input>
           </div>
         </div>
-
         <div className={"input-group"}>
           <label htmlFor="workLocation">Work Location</label>
           <input
@@ -74,7 +71,6 @@ function ExperienceForm() {
             onChange={(e) => setLocation(e.target.value)}
           ></input>
         </div>
-
         <div className={"input-group"}>
           <label htmlFor="description">Description</label>
           <input
