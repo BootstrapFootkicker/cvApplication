@@ -7,11 +7,14 @@ import "../PersonalDetails.css";
 // eslint-disable-next-line react/prop-types
 function InfoTab({ sectionName, icon }) {
   return (
+
     <button className={"info-tab"}>
       <FontAwesomeIcon icon={icon} />
       <p>{sectionName}</p>
       <FontAwesomeIcon icon={faChevronDown} />
     </button>
+
+
   );
 }
 

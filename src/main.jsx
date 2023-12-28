@@ -12,6 +12,7 @@ import PersonalDetails from "./components/PersonalDetails.jsx";
 import EducationForm from "./components/EducationForm.jsx";
 import ExperienceForm from "./components/ExperienceForm.jsx";
 import InfoTab from "./components/InfoTab.jsx";
+import Dropdown from "./components/Dropdown.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -21,5 +22,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <ExperienceForm />
     <InfoTab sectionName={"Education"} icon={faGraduationCap} />
     <InfoTab sectionName={"Experience"} icon={faBriefcase} />
+      <Dropdown />
   </React.StrictMode>,
 );
