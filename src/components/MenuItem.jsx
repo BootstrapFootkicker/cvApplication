@@ -1,25 +1,17 @@
 import React from "react";
 import {useState} from "react";
-import "../PersonalDetails.css";
-const numbers = [1, 2, 3, 4, 5];
-// const listItems =numbers.map((number) =>
-//     <li>{number}</li>
-// );
+import "../forms.css";
 
 function MenuItem({menuList}) {
-    const listItems=menuList.map((menuList)=>
-        <li className={'menu-item'}>
-            <button className={'menu-button'}>{menuList}</button>
+
+    const listItems = menuList.map((menuList) =>
+        <li className={'menu-item'} key={menuList.id}>
+            <button className={'menu-button'} onClick={menuList.trigger}>{menuList.name}</button>
         </li>
     );
-return(
-    <>{listItems}</>
-    // listItems
-    // <li className={'menu-item'}>
-    //     <button className={'menu-button'}>{name} 1</button>
-    // </li>
-);
-
+    return (
+        <>{listItems}</>
+    );
 }
 
 

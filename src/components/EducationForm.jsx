@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import "../PersonalDetails.css";
+import "../forms.css";
 
 function educationForm() {
   const [school, setSchool] = useState("");
