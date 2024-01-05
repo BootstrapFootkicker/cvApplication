@@ -1,18 +1,35 @@
 import React from "react";
 import {useState} from "react";
 import "../forms.css";
+import EducationForm from "./EducationForm.jsx";
+
 
 function MenuItem({menuList}) {
 
-    const listItems = menuList.map((menuList) =>
-        <li className={'menu-item'} key={menuList.id}>
-            <button className={'menu-button'} onClick={menuList.trigger}>{menuList.name}</button>
-        </li>
-    );
     return (
-        <>{listItems}</>
-    );
-}
+        menuList.map((menuList) => {
 
+            if (menuList.type === 'button') {
+
+                return (
+                    <li key={menuList.id} className={'menu-item'}>
+                        <div className='gap'></div>
+                        <button className={'menu-button'} onClick={menuList.trigger}>{menuList.name}</button>
+                        <div className='gap'></div>
+                    </li>
+                )
+            } else if (menuList.type === 'form') {
+
+                return (
+                    <li key={menuList.id} className={'menu-item'}>
+                        <EducationForm/>
+                    </li>)
+
+            }
+
+        })
+    )
+
+}
 
 export default MenuItem;

@@ -15,18 +15,25 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 function App() {
+    function resetMenuList() {
+        setMenuList([{
+            type:
+                'button', name: "+ Add Education", trigger: educationTrigger, id: uuid()
+        }]);
+    }
+
     function educationTrigger() {
         console.log("educationTrigger")
-  setEducationClick(!educationClick);
+        setEducationClick(!educationClick);
+        setMenuList([{type: "form", id: uuid()}])
     }
 
-    const [menuList, setMenuList] = useState([{name: "Menu 1", trigger: educationTrigger, id: uuid()}]);
+    const [menuList, setMenuList] = useState([{
+        type:
+            'button', name: "+ Add Education", trigger: educationTrigger, id: uuid()
+    }]);
     const [educationClick, setEducationClick] = useState(false);
 
-    function refreshMenu(menuItem = {name: "+ Education", trigger: educationTrigger, id: uuid()}) {
-        setMenuList([...menuList, menuItem]);
-
-    }
 
     return (
         <>
@@ -36,7 +43,7 @@ function App() {
             <Dropdown sectionName={"Education"} icon={faGraduationCap} menuList={menuList}/>
 
             {/*todo play with this*/}
-            {educationClick? <EducationForm/> : null}
+
             {/*<Dropdown sectionName={"Experience"} icon={faBriefcase} menuList ={menuList}/>*/}
         </>
     )
@@ -44,3 +51,4 @@ function App() {
 
 
 export default App;
+
