@@ -2,6 +2,7 @@ import React from "react";
 import {useState} from "react";
 import "../forms.css";
 import EducationForm from "./EducationForm.jsx";
+import {act} from "react-dom/test-utils";
 
 
 function MenuItem({menuList}) {
@@ -21,8 +22,9 @@ function MenuItem({menuList}) {
             } else if (menuList.type === 'form') {
 
                 return (
+
                     <li key={menuList.id} className={'menu-item'}>
-                        <EducationForm/>
+                        <EducationForm actions={menuList.actions}/>
                     </li>)
 
             }

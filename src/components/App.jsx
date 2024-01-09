@@ -16,16 +16,30 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function App() {
     function resetMenuList() {
-        setMenuList([{
-            type:
-                'button', name: "+ Add Education", trigger: educationTrigger, id: uuid()
+        setMenuList([...tempMenuList]);
+        console.log(menuList)
+        console.log("resetMenuList")
+    }
+
+
+    function formSubmit() {
+        setMenuList([...tempMenuList, {
+            type: "button", name: "Add Education", trigger: () => {
+                console.log("it works!")
+            }, id: uuid()
         }]);
+        console.log("formSubmit");
+        setTempMenuList([...menuList])
     }
 
     function educationTrigger() {
+
         console.log("educationTrigger")
+        setTempMenuList([...menuList]);
         setEducationClick(!educationClick);
-        setMenuList([{type: "form", id: uuid()}])
+
+
+        setMenuList([{type: "form", id: uuid(), actions: [formSubmit, resetMenuList]}]);
     }
 
     const [menuList, setMenuList] = useState([{
@@ -33,6 +47,8 @@ function App() {
             'button', name: "+ Add Education", trigger: educationTrigger, id: uuid()
     }]);
     const [educationClick, setEducationClick] = useState(false);
+
+    const [tempMenuList, setTempMenuList] = useState([...menuList]);
 
 
     return (
@@ -42,7 +58,6 @@ function App() {
             <ExperienceForm/>
             <Dropdown sectionName={"Education"} icon={faGraduationCap} menuList={menuList}/>
 
-            {/*todo play with this*/}
 
             {/*<Dropdown sectionName={"Experience"} icon={faBriefcase} menuList ={menuList}/>*/}
         </>
@@ -51,4 +66,5 @@ function App() {
 
 
 export default App;
+
 

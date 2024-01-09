@@ -1,31 +1,31 @@
 import React from "react";
 import {useState} from "react";
 import "../forms.css";
-import App from "./App.jsx";
-import app from "./App.jsx";
 
-function educationForm() {
+
+function EducationForm(actions) {
     const [school, setSchool] = useState("");
     const [degree, setDegree] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [schoolLocation, setLocation] = useState("");
+    const [placeHolder, setPlaceholder] = useState("Your school..");
 
-    function cancelForm(e) {
-        e.preventDefault();
-        //todo figure out how to reset menuList and possibly store it in a different file
-        app.resetMenuList();
-    }
 
     return (
         <div className={"form-container"}>
-            <form className={"education-form"}>
+            <form className={"education-form"} onSubmit={(e) => {
+                e.preventDefault()
+                //submit.submit
+
+
+            }}>
                 <label htmlFor="school">School</label>
                 <input
                     type={"text"}
                     id={"school"}
                     name={"school"}
-                    placeholder={"Your school.."}
+                    placeholder={placeHolder}
                     value={school}
                     onChange={(e) => setSchool(e.target.value)}
                 ></input>
@@ -72,18 +72,24 @@ function educationForm() {
                     onChange={(e) => setLocation(e.target.value)}
                 ></input>
                 <div className={"button-container"}>
-                    <button className={"submit-button"} type={"submit"}>
+                    <button className={"submit-button"} type={"submit"} onClick={() => {
+                        //submit function
+                        actions.actions[0]();
+                    }}>
                         Submit
                     </button>
-                    <button className={"cancel-button"} type={"cancel"} onClick={(e) => {
-                        cancelForm(e)
+                    <button className={"cancel-button"} onClick={() => {
+                        //refresh function
+                        actions.actions[1]();
                     }}>
                         Cancel
                     </button>
+
+
                 </div>
             </form>
         </div>
     );
 }
 
-export default educationForm;
+export default EducationForm;
