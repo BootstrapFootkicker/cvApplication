@@ -5,33 +5,38 @@ import EducationForm from "./EducationForm.jsx";
 import {act} from "react-dom/test-utils";
 
 
-function MenuItem({menuList}) {
+// eslint-disable-next-line react/prop-types
+function MenuItem({item}) {
 
-    return (
-        menuList.map((menuList) => {
+    // eslint-disable-next-line react/prop-types
+    if (item.type === 'button') {
 
-            if (menuList.type === 'button') {
 
-                return (
-                    <li key={menuList.id} className={'menu-item'}>
-                        <div className='gap'></div>
-                        <button className={'menu-button'} onClick={menuList.trigger}>{menuList.name}</button>
-                        <div className='gap'></div>
-                    </li>
-                )
-            } else if (menuList.type === 'form') {
+        return (
+            // eslint-disable-next-line react/prop-types
+            <li key={item.id} className={'menu-item'}>
+                <div className='gap'></div>
+                {/* eslint-disable-next-line react/prop-types */}
+                <button className={'menu-button'} onClick={item.trigger}>{item.name}</button>
+                <div className='gap'></div>
+            </li>
+        )
 
-                return (
+        // eslint-disable-next-line react/prop-types
+    } else if (item.type === 'form') {
 
-                    <li key={menuList.id} className={'menu-item'}>
-                        <EducationForm actions={menuList.actions}/>
-                    </li>)
 
-            }
+        return (
 
-        })
-    )
+            // eslint-disable-next-line react/prop-types
+            <li key={item.id} className={'menu-item'}>
+                {/* eslint-disable-next-line react/prop-types */}
+                <EducationForm id={item.id} actions={item.actions}/>
+            </li>)
 
+
+    }
+    //todo add statements to support all types of forms
 }
 
 export default MenuItem;

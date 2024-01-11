@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import ReactDOM from "react-dom/client";
 import {useState} from "react";
 
@@ -13,42 +13,67 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-
+//Temp state update wont work since states dont update in time, consider togglinmg display instead
 function App() {
-    function resetMenuList() {
-        setMenuList([...tempMenuList]);
-        console.log(menuList)
-        console.log("resetMenuList")
+
+    useEffect(() => {
+    })
+
+
+    function resetMenuList(id) {
+        removeMenuItem(id)
+        // console.log(this.id)
+        // removeMenuItem(this.id)
     }
 
 
-    function formSubmit() {
-        setMenuList([...tempMenuList, {
-            type: "button", name: "Add Education", trigger: () => {
+    function formSubmit(id) {
+        //Maybe add trigger for education check maybe remove
+        //tODO ADD   functionality to create button from form info
+        addNewMenuItem({
+            type: "button", name: "new Education", id: uuid(), trigger: () => {
                 console.log("it works!")
-            }, id: uuid()
-        }]);
-        console.log("formSubmit");
-        setTempMenuList([...menuList])
+            }
+        })
+        removeMenuItem(id)
+
+
     }
+
+
+    function addNewMenuItem(item) {
+        setMenuList(currentMenuList => {
+                return [item, ...currentMenuList]
+            }
+        )
+    }
+
+
+    function removeMenuItem(id) {
+
+        console.log(id)
+        setMenuList(currentMenuList => {
+                return currentMenuList.filter((item) => item.id !== id)
+            }
+        )
+    }
+
 
     function educationTrigger() {
-
+        //todo remove button when adding form
+        //todo Make this trigger apply to all forms
         console.log("educationTrigger")
-        setTempMenuList([...menuList]);
-        setEducationClick(!educationClick);
 
+        addNewMenuItem({type: "form", id: uuid(), actions: [formSubmit, resetMenuList]})
 
-        setMenuList([{type: "form", id: uuid(), actions: [formSubmit, resetMenuList]}]);
     }
+
 
     const [menuList, setMenuList] = useState([{
         type:
             'button', name: "+ Add Education", trigger: educationTrigger, id: uuid()
     }]);
     const [educationClick, setEducationClick] = useState(false);
-
-    const [tempMenuList, setTempMenuList] = useState([...menuList]);
 
 
     return (

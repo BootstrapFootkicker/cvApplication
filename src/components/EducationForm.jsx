@@ -3,17 +3,19 @@ import {useState} from "react";
 import "../forms.css";
 
 
-function EducationForm(actions) {
+function EducationForm(actions, id) {
     const [school, setSchool] = useState("");
     const [degree, setDegree] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [schoolLocation, setLocation] = useState("");
     const [placeHolder, setPlaceholder] = useState("Your school..");
-
+    
+//todo figure out destructuring and also figure out why all info is being stored in actions
 
     return (
         <div className={"form-container"}>
+
             <form className={"education-form"} onSubmit={(e) => {
                 e.preventDefault()
                 //submit.submit
@@ -74,13 +76,14 @@ function EducationForm(actions) {
                 <div className={"button-container"}>
                     <button className={"submit-button"} type={"submit"} onClick={() => {
                         //submit function
-                        actions.actions[0]();
+                        actions.actions[0](actions.id);
                     }}>
                         Submit
                     </button>
                     <button className={"cancel-button"} onClick={() => {
                         //refresh function
-                        actions.actions[1]();
+
+                        actions.actions[1](actions.id);
                     }}>
                         Cancel
                     </button>
@@ -89,6 +92,7 @@ function EducationForm(actions) {
                 </div>
             </form>
         </div>
+
     );
 }
 

@@ -3,11 +3,11 @@ import {useState} from "react";
 import "../dropDown.css";
 import {faChevronDown} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import MenuItem from "./MenuItem.jsx";
+import MenuList from "./MenuList.jsx";
 import PersonalDetails from "./PersonalDetails.jsx";
 
 
-function Dropdown({sectionName, icon,menuList}) {
+function Dropdown({sectionName, icon, menuList}) {
     const [open, setOpen] = useState(false);
 
     const toggle = () => setOpen(!open);
@@ -26,9 +26,8 @@ function Dropdown({sectionName, icon,menuList}) {
 
             </button>
             {open ? (
-                <ul className={'menu'}>
-                    <MenuItem menuList={menuList}/>
-                </ul>) : null}
+                <MenuList menuList={menuList} sectionName={sectionName}/>
+            ) : null}
 
         </div>
     );
