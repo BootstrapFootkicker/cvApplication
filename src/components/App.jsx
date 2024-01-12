@@ -16,6 +16,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 //Temp state update wont work since states  dont update in time, consider togglinmg display instead
 function App() {
 
+    function buttonEdit(formInfo) {
+        //todo figure out way to edit button using form and existing info, Consider making this work for different types of forms i.e if this use this info
+    }
+
     useEffect(() => {
         console.log(formToggle)
     })
@@ -30,11 +34,9 @@ function App() {
     }
 
 
-    function formSubmit(id) {
-        //Maybe add trigger for education check maybe remove
-        //tODO ADD   functionality to create button from form info
+    function formSubmit(id, formInfo) {
         addNewMenuItem({
-            type: "button", name: "new Education", id: uuid(), trigger: () => {
+            type: "button", name: formInfo.name, id: uuid(), formInfo: formInfo, trigger: () => {
                 console.log("it works!")
             }
         })
@@ -63,7 +65,6 @@ function App() {
 
 
     function educationTrigger() {
-        //todo remove button when adding form
         //todo Make this trigger apply to all forms
         console.log("educationTrigger")
         toggleForm()

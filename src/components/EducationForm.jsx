@@ -76,7 +76,13 @@ function EducationForm(actions, toggleSetter) {
                 <div className={"button-container"}>
                     <button className={"submit-button"} type={"submit"} onClick={() => {
                         //submit function
-                        actions.actions[0](actions.id);
+                        actions.actions[0](actions.id, {
+                            name: school,
+                            degree: degree,
+                            startDate: startDate,
+                            endDate: endDate,
+                            location: schoolLocation
+                        });
                         actions.toggleSetter(false);
                     }}>
                         Submit
