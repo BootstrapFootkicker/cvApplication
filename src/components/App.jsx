@@ -13,17 +13,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-//Temp state update wont work since states dont update in time, consider togglinmg display instead
+//Temp state update wont work since states  dont update in time, consider togglinmg display instead
 function App() {
 
     useEffect(() => {
+        console.log(formToggle)
     })
 
 
+    function createAddButton(title, trigger) {
+        return {type: "button", name: title, trigger: trigger, id: uuid()}
+    }
+
     function resetMenuList(id) {
         removeMenuItem(id)
-        // console.log(this.id)
-        // removeMenuItem(this.id)
     }
 
 
@@ -63,17 +66,22 @@ function App() {
         //todo remove button when adding form
         //todo Make this trigger apply to all forms
         console.log("educationTrigger")
-
+        toggleForm()
         addNewMenuItem({type: "form", id: uuid(), actions: [formSubmit, resetMenuList]})
 
     }
 
+    function toggleForm() {
+        console.log("toggleForm")
+        setFormToggle(!formToggle)
+
+    }
 
     const [menuList, setMenuList] = useState([{
         type:
             'button', name: "+ Add Education", trigger: educationTrigger, id: uuid()
     }]);
-    const [educationClick, setEducationClick] = useState(false);
+    const [formToggle, setFormToggle] = useState(false);
 
 
     return (
@@ -81,8 +89,9 @@ function App() {
             <PersonalDetails/>
             <EducationForm/>
             <ExperienceForm/>
-            <Dropdown sectionName={"Education"} icon={faGraduationCap} menuList={menuList}/>
-
+            <Dropdown sectionName={"Education"} icon={faGraduationCap} menuList={menuList} formToggle={formToggle}
+                      toggleSetter={setFormToggle}/>
+            <button onClick={toggleForm}>test</button>
 
             {/*<Dropdown sectionName={"Experience"} icon={faBriefcase} menuList ={menuList}/>*/}
         </>

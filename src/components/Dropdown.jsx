@@ -7,7 +7,7 @@ import MenuList from "./MenuList.jsx";
 import PersonalDetails from "./PersonalDetails.jsx";
 
 
-function Dropdown({sectionName, icon, menuList}) {
+function Dropdown({sectionName, icon, menuList, toggleSetter, formToggle}) {
     const [open, setOpen] = useState(false);
 
     const toggle = () => setOpen(!open);
@@ -26,7 +26,8 @@ function Dropdown({sectionName, icon, menuList}) {
 
             </button>
             {open ? (
-                <MenuList menuList={menuList} sectionName={sectionName}/>
+                <MenuList menuList={menuList} sectionName={sectionName} toggleSetter={toggleSetter}
+                          formToggle={formToggle}/>
             ) : null}
 
         </div>

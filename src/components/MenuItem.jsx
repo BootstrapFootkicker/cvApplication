@@ -3,10 +3,14 @@ import {useState} from "react";
 import "../forms.css";
 import EducationForm from "./EducationForm.jsx";
 import {act} from "react-dom/test-utils";
+import MenuList from "./MenuList.jsx";
 
 
 // eslint-disable-next-line react/prop-types
-function MenuItem({item}) {
+function MenuItem({item, formToggle, toggleSetter}) {
+
+    console.log(formToggle)
+    console.log("menu item")
 
     // eslint-disable-next-line react/prop-types
     if (item.type === 'button') {
@@ -14,12 +18,16 @@ function MenuItem({item}) {
 
         return (
             // eslint-disable-next-line react/prop-types
-            <li key={item.id} className={'menu-item'}>
-                <div className='gap'></div>
-                {/* eslint-disable-next-line react/prop-types */}
-                <button className={'menu-button'} onClick={item.trigger}>{item.name}</button>
-                <div className='gap'></div>
-            </li>
+            <>
+                {!formToggle ? (
+                    <li key={item.id} className={'menu-item'}>
+                        <div className='gap'></div>
+                        {/* eslint-disable-next-line react/prop-types */}
+                        <button className={'menu-button'}
+                                onClick={item.trigger}>{item.name}</button>
+                        <div className='gap'></div>
+                    </li>) : null}
+            </>
         )
 
         // eslint-disable-next-line react/prop-types
@@ -31,12 +39,12 @@ function MenuItem({item}) {
             // eslint-disable-next-line react/prop-types
             <li key={item.id} className={'menu-item'}>
                 {/* eslint-disable-next-line react/prop-types */}
-                <EducationForm id={item.id} actions={item.actions}/>
+                <EducationForm id={item.id} actions={item.actions} toggleSetter={toggleSetter}/>
             </li>)
-
-
     }
-    //todo add statements to support all types of forms
+
+
+//todo add statements to support all types of forms
 }
 
 export default MenuItem;

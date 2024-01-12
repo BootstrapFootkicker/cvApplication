@@ -3,16 +3,16 @@ import {useState} from "react";
 import "../forms.css";
 
 
-function EducationForm(actions, id) {
+function EducationForm(actions, toggleSetter) {
     const [school, setSchool] = useState("");
     const [degree, setDegree] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [schoolLocation, setLocation] = useState("");
     const [placeHolder, setPlaceholder] = useState("Your school..");
-    
-//todo figure out destructuring and also figure out why all info is being stored in actions
 
+//todo figure out destructuring and also figure out why all info is being stored in actions
+    console.log(actions)
     return (
         <div className={"form-container"}>
 
@@ -77,6 +77,7 @@ function EducationForm(actions, id) {
                     <button className={"submit-button"} type={"submit"} onClick={() => {
                         //submit function
                         actions.actions[0](actions.id);
+                        actions.toggleSetter(false);
                     }}>
                         Submit
                     </button>
@@ -84,6 +85,7 @@ function EducationForm(actions, id) {
                         //refresh function
 
                         actions.actions[1](actions.id);
+                        actions.toggleSetter(false);
                     }}>
                         Cancel
                     </button>
