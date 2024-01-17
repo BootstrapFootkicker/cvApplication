@@ -1,24 +1,24 @@
 import React from "react";
 import {useState} from "react";
 import "../forms.css";
+import {v4 as uuid} from "uuid";
 
 
-function EducationForm(actions, toggleSetter) {
+export function EducationForm(elementInfo) {
     const [school, setSchool] = useState("");
     const [degree, setDegree] = useState("");
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
     const [schoolLocation, setLocation] = useState("");
     const [placeHolder, setPlaceholder] = useState("Your school..");
-
+//todo figure out how to get forms working again
 //todo figure out destructuring and also figure out why all info is being stored in actions
-    console.log(actions)
+
     return (
         <div className={"form-container"}>
 
             <form className={"education-form"} onSubmit={(e) => {
                 e.preventDefault()
-                //submit.submit
 
 
             }}>
@@ -76,22 +76,33 @@ function EducationForm(actions, toggleSetter) {
                 <div className={"button-container"}>
                     <button className={"submit-button"} type={"submit"} onClick={() => {
                         //submit function
-                        actions.actions[0](actions.id, {
-                            name: school,
-                            degree: degree,
-                            startDate: startDate,
-                            endDate: endDate,
-                            location: schoolLocation
-                        });
-                        actions.toggleSetter(false);
-                    }}>
+                        elementInfo.elementInfo.actions[0](elementInfo.elementInfo.id, school, uuid())
+                        //     {
+                        //     elementInfo: {
+                        //         name: school,
+                        //         degree: degree,
+                        //         startDate: startDate,
+                        //         endDate: endDate,
+                        //         location: schoolLocation,
+                        //         id: uuid()
+                        //     }
+                        // }
+                        // );
+                        // console.log(elementInfo.elementInfo.actions)
+                        // console.log(elementInfo.elementInfo.id)
+                        //set form toggle to false
+                        elementInfo.elementInfo.actions[2](false);
+                    }
+
+                    }>
                         Submit
                     </button>
                     <button className={"cancel-button"} onClick={() => {
                         //refresh function
+                        elementInfo.elementInfo.actions[1](elementInfo.elementInfo.id);
+                        //set form toggle to false
+                        elementInfo.elementInfo.actions[2](false);
 
-                        actions.actions[1](actions.id);
-                        actions.toggleSetter(false);
                     }}>
                         Cancel
                     </button>
@@ -104,4 +115,3 @@ function EducationForm(actions, toggleSetter) {
     );
 }
 
-export default EducationForm;

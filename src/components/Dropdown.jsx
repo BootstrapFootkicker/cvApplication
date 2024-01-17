@@ -3,11 +3,11 @@ import {useState} from "react";
 import "../dropDown.css";
 import {faChevronDown} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import MenuList from "./MenuList.jsx";
+import {MenuList} from "./MenuList.jsx";
 import PersonalDetails from "./PersonalDetails.jsx";
 
 
-function Dropdown({sectionName, icon, menuList, toggleSetter, formToggle}) {
+export function Dropdown({sectionName, icon, menuList, toggleSetter, formToggle}) {
     const [open, setOpen] = useState(false);
 
     const toggle = () => setOpen(!open);
@@ -35,4 +35,3 @@ function Dropdown({sectionName, icon, menuList, toggleSetter, formToggle}) {
 }
 
 
-export default Dropdown;

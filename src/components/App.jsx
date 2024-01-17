@@ -3,25 +3,29 @@ import ReactDOM from "react-dom/client";
 import {useState} from "react";
 
 import PersonalDetails from "./PersonalDetails.jsx";
-import EducationForm from "./EducationForm.jsx";
+import {EducationForm} from "./EducationForm.jsx";
 import ExperienceForm from "./ExperienceForm.jsx";
-import Dropdown from "./Dropdown.jsx";
+import {Dropdown} from "./Dropdown.jsx";
 import {v4 as uuid} from "uuid";
 import {
     faGraduationCap,
     faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {InfoButton} from "./InfoButton.jsx";
 
 //Temp state update wont work since states  dont update in time, consider togglinmg display instead
-function App() {
+export function App() {
+//todo change functions to have elementInfo:{} format!
 
-    function buttonEdit(formInfo) {
-        //todo figure out way to edit button using form and existing info, Consider making this work for different types of forms i.e if this use this info
-    }
+    const [menuList, setMenuList] = useState([{
+        elementInfo: {type: 'formButton', name: "+ Add Education", trigger: educationTrigger, id: uuid()}
+    }]);
+    const [formToggle, setFormToggle] = useState(false);
 
     useEffect(() => {
         console.log(formToggle)
+        // console.log(menuList)
     })
 
 
@@ -33,14 +37,27 @@ function App() {
         removeMenuItem(id)
     }
 
+    function submitEditForm(formId, formInfo, targetId) {
 
-    function formSubmit(id, formInfo) {
+    }
+
+    function createEditForm(buttonId, elementInfo) {
+        toggleForm()
+        addNewMenuItem({type: "form", id: uuid(), actions: [submitEditForm, resetMenuList], elementInfo: elementInfo})
+    }
+
+    function formSubmit(formId, name, id) {
         addNewMenuItem({
-            type: "button", name: formInfo.name, id: uuid(), formInfo: formInfo, trigger: () => {
-                console.log("it works!")
+            elementInfo: {
+                type: "button",
+                name: name,
+                id: id,
+                trigger: createEditForm
             }
         })
-        removeMenuItem(id)
+
+
+        removeMenuItem(formId)
 
 
     }
@@ -56,9 +73,29 @@ function App() {
 
     function removeMenuItem(id) {
 
-        console.log(id)
+        console.log(id + " removed")
         setMenuList(currentMenuList => {
-                return currentMenuList.filter((item) => item.id !== id)
+                return currentMenuList.filter((item) => item.elementInfo.id !== id)
+            }
+        )
+    }
+
+
+    function findMenuItem(id) {
+        return menuList.find((item) => item.elementInfo.id === id)
+    }
+
+    //todo Make all prop name consistent across components
+
+    function findMenuItemIndex(id) {
+        return menuList.findIndex((item) => item.elementInfo.id === id)
+    }
+
+    function editMenuItem(id, elementInfo) {
+        let index = findMenuItemIndex(id)
+        let item = {type: "button", name: elementInfo.name, id: uuid(), elementInfo: elementInfo, trigger: editMenuItem}
+        setMenuList(currentMenuList => {
+                return [...currentMenuList.slice(0, index), item, ...currentMenuList.slice(index + 1)]
             }
         )
     }
@@ -68,21 +105,20 @@ function App() {
         //todo Make this trigger apply to all forms
         console.log("educationTrigger")
         toggleForm()
-        addNewMenuItem({type: "form", id: uuid(), actions: [formSubmit, resetMenuList]})
+        addNewMenuItem({
+            elementInfo: {
+                type: "form",
+                id: uuid(),
+                actions: [formSubmit, resetMenuList, setFormToggle, removeMenuItem, setMenuList]
+            }
+        })
 
     }
 
     function toggleForm() {
         console.log("toggleForm")
         setFormToggle(!formToggle)
-
     }
-
-    const [menuList, setMenuList] = useState([{
-        type:
-            'button', name: "+ Add Education", trigger: educationTrigger, id: uuid()
-    }]);
-    const [formToggle, setFormToggle] = useState(false);
 
 
     return (
@@ -100,6 +136,6 @@ function App() {
 }
 
 
-export default App;
+
 
 
