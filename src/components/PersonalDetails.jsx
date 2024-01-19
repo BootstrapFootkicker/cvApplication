@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "../forms.css";
-function PersonalDetails() {
+export function PersonalDetails() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -54,5 +54,3 @@ function PersonalDetails() {
     </div>
   );
 }
-
-export default PersonalDetails;
