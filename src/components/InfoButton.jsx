@@ -3,16 +3,14 @@ import {useState} from "react";
 import "../dropDown.css";
 
 export function InfoButton({elementInfo}) {
-    // function buttonTrigger() {
-    //     createEditForm(buttonInfo.buttonId, buttonInfo)
-    // }
+    const handleClick = () => {
+        elementInfo.trigger(elementInfo.id, elementInfo);
+    };
 
     return (
         <button
             className={"menu-button"}
-            onClick={() => {
-                console.log(elementInfo.name);
-            }}
+            onClick={handleClick}
         >
             {elementInfo.name}
         </button>

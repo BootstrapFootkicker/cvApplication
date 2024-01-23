@@ -5,11 +5,12 @@ import "../dropDown.css";
 import {EducationForm} from "./EducationForm.jsx";
 import {act} from "react-dom/test-utils";
 import {MenuList} from "./MenuList.jsx";
-import {InfoButton} from "./InfoButton.jsx";
+import {InfoButton} from "./InfoButton.jsx"
 import {FormTriggerButton} from "./FormTriggerButton.jsx";
 
 // eslint-disable-next-line react/prop-types
 export function MenuItem({item, formToggle, toggleSetter}) {
+    console.log('MenuItem rendered');
     // eslint-disable-next-line react/prop-types
     if (item.elementInfo.type === "formButton") {
         return (

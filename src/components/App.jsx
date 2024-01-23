@@ -29,9 +29,14 @@ export function App() {
     ]);
     const [formToggle, setFormToggle] = useState(false);
 
+    const [newItem, setNewItem] = useState(null);
+
     useEffect(() => {
-        console.log(formToggle);
-    });
+        if (newItem) {
+            addNewMenuItem(newItem);
+            setNewItem(null); // reset newItem after adding
+        }
+    }, [newItem]);
 
 
     function resetMenuList(id) {
@@ -42,17 +47,24 @@ export function App() {
     }
 
     function createEditForm(buttonId, elementInfo) {
-        toggleForm();
-        addNewMenuItem({
-            type: "form",
-            formType: "edit",
-            id: uuid(),
-            actions: [submitEditForm, resetMenuList],
-            elementInfo: elementInfo,
-        });
+        console.log("createEditForm is called");
+        toggleForm()
+        const newItem = {
+            elementInfo: {
+                type: "form",
+                formType: "edit",
+                id: uuid(),
+                actions: [submitEditForm, resetMenuList],
+                elementInfo: elementInfo,
+                formInfo: elementInfo.formInfo,
+            },
+        };
+        setNewItem(newItem); // set the new item to be added
     }
 
+
     function formSubmit(formId, name, id, formInfo) {
+        console.log('Trigger function: ', createEditForm);
         addNewMenuItem({
             elementInfo: {
                 type: "button",

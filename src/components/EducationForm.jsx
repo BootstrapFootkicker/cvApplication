@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {useState} from "react";
 import "../forms.css";
 import {v4 as uuid} from "uuid";
@@ -10,6 +10,7 @@ export function EducationForm({
                                   elementInfo
                               }
 ) {
+    console.log(formInfo)
     const [school, setSchool] = useState("");
     const [degree, setDegree] = useState("");
     const [startDate, setStartDate] = useState("");
@@ -17,16 +18,19 @@ export function EducationForm({
     const [schoolLocation, setLocation] = useState("");
     const [placeHolder, setPlaceholder] = useState("Your school..");
 
-    if (formType === "edit") {
-        setSchool(formInfo.school);
-        setDegree(formInfo.degree);
-        setStartDate(formInfo.startDate);
-        setEndDate(formInfo.endDate);
-        setLocation(formInfo.schoolLocation);
-        setPlaceholder(formInfo.school);
-    }
+    useEffect(() => {
+        if (formType === "edit") {
+            setSchool(formInfo.school || "");
+            setDegree(formInfo.degree || "");
+            setStartDate(formInfo.startDate || "");
+            setEndDate(formInfo.endDate || "");
+            setLocation(formInfo.schoolLocation || "");
+            setPlaceholder(formInfo.school || "");
+        }
+    }, [formType, formInfo]);
 
     return (
+
         <div className={"form-container"}>
 
             <form
@@ -93,7 +97,13 @@ export function EducationForm({
                         type={"submit"}
                         onClick={() => {
                             console.log(elementInfo.actions)
-                            elementInfo.actions.formSubmit(id, school, uuid());
+                            elementInfo.actions.formSubmit(id, school, uuid(), {
+                                school: school,
+                                degree: degree,
+                                startDate: startDate,
+                                endDate: endDate,
+                                schoolLocation: schoolLocation
+                            });
                             elementInfo.actions.setFormToggle(false);
                         }}
                     >
