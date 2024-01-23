@@ -1,108 +1,120 @@
 import React from "react";
-import { useState } from "react";
+import {useState} from "react";
 import "../forms.css";
-import { v4 as uuid } from "uuid";
+import {v4 as uuid} from "uuid";
 
-export function EducationForm(elementInfo) {
-  const [school, setSchool] = useState("");
-  const [degree, setDegree] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [schoolLocation, setLocation] = useState("");
-  const [placeHolder, setPlaceholder] = useState("Your school..");
-  //todo figure out how to get forms working again
-  //todo figure out destructuring and also figure out why all info is being stored in actions
+export function EducationForm({
+                                  formType,
+                                  formInfo,
+                                  id,
+                                  elementInfo
+                              }
+) {
+    const [school, setSchool] = useState("");
+    const [degree, setDegree] = useState("");
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
+    const [schoolLocation, setLocation] = useState("");
+    const [placeHolder, setPlaceholder] = useState("Your school..");
 
-  return (
-    <div className={"form-container"}>
-      <form
-        className={"education-form"}
-        onSubmit={(e) => {
-          e.preventDefault();
-        }}
-      >
-        <label htmlFor="school">School</label>
-        <input
-          type={"text"}
-          id={"school"}
-          name={"school"}
-          placeholder={placeHolder}
-          value={school}
-          onChange={(e) => setSchool(e.target.value)}
-        ></input>
+    if (formType === "edit") {
+        setSchool(formInfo.school);
+        setDegree(formInfo.degree);
+        setStartDate(formInfo.startDate);
+        setEndDate(formInfo.endDate);
+        setLocation(formInfo.schoolLocation);
+        setPlaceholder(formInfo.school);
+    }
 
-        <label htmlFor="degree">Degree</label>
-        <input
-          type={"text"}
-          id={"degree"}
-          name={"degree"}
-          placeholder={"Your degree.."}
-          value={degree}
-          onChange={(e) => setDegree(e.target.value)}
-        ></input>
+    return (
+        <div className={"form-container"}>
 
-        <div className={"date-container"}>
-          <label htmlFor="startDate">Start Date</label>
-          <input
-            type={"date"}
-            id={"startDate"}
-            name={"startDate"}
-            placeholder={"Your start date.."}
-            value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          ></input>
+            <form
+                className={"education-form"}
+                onSubmit={(e) => {
+                    e.preventDefault();
+                }}
+            >
 
-          <label htmlFor="endDate">End Date</label>
-          <input
-            type={"date"}
-            id={"endDate"}
-            name={"endDate"}
-            placeholder={"Your end date.."}
-            value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          ></input>
+                <label htmlFor="school">School</label>
+                <input
+                    type={"text"}
+                    id={"school"}
+                    name={"school"}
+                    placeholder={placeHolder}
+                    value={school}
+                    onChange={(e) => setSchool(e.target.value)}
+                ></input>
+
+                <label htmlFor="degree">Degree</label>
+                <input
+                    type={"text"}
+                    id={"degree"}
+                    name={"degree"}
+                    placeholder={"Your degree.."}
+                    value={degree}
+                    onChange={(e) => setDegree(e.target.value)}
+                ></input>
+
+                <div className={"date-container"}>
+                    <label htmlFor="startDate">Start Date</label>
+                    <input
+                        type={"date"}
+                        id={"startDate"}
+                        name={"startDate"}
+                        placeholder={"Your start date.."}
+                        value={startDate}
+                        onChange={(e) => setStartDate(e.target.value)}
+                    ></input>
+
+                    <label htmlFor="endDate">End Date</label>
+                    <input
+                        type={"date"}
+                        id={"endDate"}
+                        name={"endDate"}
+                        placeholder={"Your end date.."}
+                        value={endDate}
+                        onChange={(e) => setEndDate(e.target.value)}
+                    ></input>
+                </div>
+
+                <label htmlFor="schoolLocation">School Location</label>
+                <input
+                    type={"text"}
+                    id={"schoolLocation"}
+                    name={"schoolLocation"}
+                    placeholder={"Your school location.."}
+                    value={schoolLocation}
+                    onChange={(e) => setLocation(e.target.value)}
+                ></input>
+                <div className={"button-container"}>
+                    <button
+                        className={"submit-button"}
+                        type={"submit"}
+                        onClick={() => {
+                            console.log(elementInfo.actions)
+                            elementInfo.actions.formSubmit(id, school, uuid());
+                            elementInfo.actions.setFormToggle(false);
+                        }}
+                    >
+                        Submit
+                    </button>
+                    <button
+                        className={"cancel-button"}
+                        onClick={() => {
+                            elementInfo.actions.resetMenuList(id);
+                            elementInfo.actions.setFormToggle(false);
+
+                        }}
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </form>
         </div>
-
-        <label htmlFor="schoolLocation">School Location</label>
-        <input
-          type={"text"}
-          id={"schoolLocation"}
-          name={"schoolLocation"}
-          placeholder={"Your school location.."}
-          value={schoolLocation}
-          onChange={(e) => setLocation(e.target.value)}
-        ></input>
-        <div className={"button-container"}>
-          <button
-            className={"submit-button"}
-            type={"submit"}
-            onClick={() => {
-              //submit function
-              elementInfo.elementInfo.actions[0](
-                elementInfo.elementInfo.id,
-                school,
-                uuid(),
-              );
-
-              //set form toggle to false
-              elementInfo.elementInfo.actions[2](false);
-            }}
-          >
-            Submit
-          </button>
-          <button
-            className={"cancel-button"}
-            onClick={() => {
-              //refresh function
-              elementInfo.elementInfo.actions[1](elementInfo.elementInfo.id);
-              //set form toggle to false
-              elementInfo.elementInfo.actions[2](false);
-            }}
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-    </div>
-  );
+    );
 }
+
+
+
+

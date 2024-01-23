@@ -10,7 +10,7 @@ export function MenuList({menuList, formToggle, toggleSetter, setMenuList}) {
             {menuList.map((item) => {
                     // eslint-disable-next-line react/jsx-key
 
-                    return (<MenuItem key={item.elementInfo.id} item={item.elementInfo} formToggle={formToggle}
+                    return (<MenuItem key={item.elementInfo.id} item={item} formToggle={formToggle}
                                       toggleSetter={toggleSetter} setMenuList={setMenuList}/>)
                 }
             )}
