@@ -1,16 +1,16 @@
 import React, {useEffect} from "react";
 import {useState} from "react";
 import "../forms.css";
-import {v4 as uuid} from "uuid";
+
 
 export function EducationForm({
                                   formType,
                                   formInfo,
-                                  id,
+                                  formId,
                                   elementInfo
                               }
 ) {
-    console.log(formInfo)
+
     const [school, setSchool] = useState("");
     const [degree, setDegree] = useState("");
     const [startDate, setStartDate] = useState("");
@@ -96,15 +96,22 @@ export function EducationForm({
                         className={"submit-button"}
                         type={"submit"}
                         onClick={() => {
-                            console.log(elementInfo.actions)
-                            elementInfo.actions.formSubmit(id, school, uuid(), {
-                                school: school,
-                                degree: degree,
-                                startDate: startDate,
-                                endDate: endDate,
-                                schoolLocation: schoolLocation
-                            });
+                            console.log('formId:', formId); // Log the formId
+                            if (formType === "edit") {
+                                elementInfo.actions.editMenuItem(elementInfo.buttonId, formId, elementInfo);
+                            } else {
+
+                                elementInfo.actions.formSubmit(formId, school, elementInfo.id, {
+                                    school: school,
+                                    degree: degree,
+                                    startDate: startDate,
+                                    endDate: endDate,
+                                    schoolLocation: schoolLocation,
+                                    formType: formType,
+                                });
+                            }
                             elementInfo.actions.setFormToggle(false);
+                            // }
                         }}
                     >
                         Submit
@@ -112,7 +119,7 @@ export function EducationForm({
                     <button
                         className={"cancel-button"}
                         onClick={() => {
-                            elementInfo.actions.resetMenuList(id);
+                            elementInfo.actions.resetMenuList(formId);
                             elementInfo.actions.setFormToggle(false);
 
                         }}

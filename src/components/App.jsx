@@ -43,18 +43,24 @@ export function App() {
         removeMenuItem(id);
     }
 
-    function submitEditForm(formId, formInfo, targetId) {
-    }
 
     function createEditForm(buttonId, elementInfo) {
         console.log("createEditForm is called");
         toggleForm()
+        console.log(elementInfo.id)
         const newItem = {
             elementInfo: {
                 type: "form",
                 formType: "edit",
                 id: uuid(),
-                actions: [submitEditForm, resetMenuList],
+                buttonId: elementInfo.id,
+                actions: {
+                    editMenuItem: editMenuItem,
+                    resetMenuList: resetMenuList,
+                    setFormToggle: setFormToggle,
+                    removeMenuItem: removeMenuItem,
+                    setMenuList: setMenuList
+                },
                 elementInfo: elementInfo,
                 formInfo: elementInfo.formInfo,
             },
@@ -63,19 +69,27 @@ export function App() {
     }
 
 
-    function formSubmit(formId, name, id, formInfo) {
-        console.log('Trigger function: ', createEditForm);
+    function editMenuItem(buttonId, formId, elementInfo) {
+        removeMenuItem(buttonId);
+        removeMenuItem(formId);
+    }
+
+
+    function formSubmit(formId, name, formInfo) {
+
+
         addNewMenuItem({
             elementInfo: {
                 type: "button",
                 name: name,
-                id: id,
+                id: uuid(),
                 trigger: createEditForm,
                 formInfo: formInfo,
             },
         });
 
         removeMenuItem(formId);
+
     }
 
     function addNewMenuItem(item) {
@@ -85,39 +99,14 @@ export function App() {
     }
 
     function removeMenuItem(id) {
-        console.log(id + " removed");
+        console.log('removeMenuItem start:', id, menuList);
         setMenuList((currentMenuList) => {
-            return currentMenuList.filter((item) => item.elementInfo.id !== id);
+            const updatedMenuList = currentMenuList.filter((item) => item.elementInfo.id !== id);
+            console.log('removeMenuItem end:', id, updatedMenuList);
+            return updatedMenuList;
         });
     }
 
-    function findMenuItem(id) {
-        return menuList.find((item) => item.elementInfo.id === id);
-    }
-
-    //todo Make all prop name consistent across components
-
-    function findMenuItemIndex(id) {
-        return menuList.findIndex((item) => item.elementInfo.id === id);
-    }
-
-    function editMenuItem(id, elementInfo) {
-        let index = findMenuItemIndex(id);
-        let item = {
-            type: "button",
-            name: elementInfo.name,
-            id: uuid(),
-            elementInfo: elementInfo,
-            trigger: editMenuItem,
-        };
-        setMenuList((currentMenuList) => {
-            return [
-                ...currentMenuList.slice(0, index),
-                item,
-                ...currentMenuList.slice(index + 1),
-            ];
-        });
-    }
 
     function educationTrigger() {
         //todo Make this trigger apply to all forms

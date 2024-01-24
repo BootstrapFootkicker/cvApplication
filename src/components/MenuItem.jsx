@@ -10,7 +10,7 @@ import {FormTriggerButton} from "./FormTriggerButton.jsx";
 
 // eslint-disable-next-line react/prop-types
 export function MenuItem({item, formToggle, toggleSetter}) {
-    console.log('MenuItem rendered');
+
     // eslint-disable-next-line react/prop-types
     if (item.elementInfo.type === "formButton") {
         return (
@@ -56,7 +56,7 @@ export function MenuItem({item, formToggle, toggleSetter}) {
                 <EducationForm
                     formType={item.elementInfo.formType}
                     formInfo={item.elementInfo.formInfo}
-                    id={item.elementInfo.id}
+                    formId={item.elementInfo.id}
                     elementInfo={item.elementInfo}
                 />
             </li>
