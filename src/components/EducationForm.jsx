@@ -98,10 +98,17 @@ export function EducationForm({
                         onClick={() => {
                             console.log('formId:', formId); // Log the formId
                             if (formType === "edit") {
-                                elementInfo.actions.editMenuItem(elementInfo.buttonId, formId, elementInfo);
+                                elementInfo.actions.editMenuItem(elementInfo.buttonId, formId, {
+                                    school: school,
+                                    degree: degree,
+                                    startDate: startDate,
+                                    endDate: endDate,
+                                    schoolLocation: schoolLocation,
+                                    formType: formType,
+                                });
                             } else {
 
-                                elementInfo.actions.formSubmit(formId, school, elementInfo.id, {
+                                elementInfo.actions.formSubmit(formId, school, {
                                     school: school,
                                     degree: degree,
                                     startDate: startDate,
@@ -120,12 +127,26 @@ export function EducationForm({
                         className={"cancel-button"}
                         onClick={() => {
                             elementInfo.actions.resetMenuList(formId);
+                            elementInfo.actions.removeMenuItem(elementInfo.buttonId);
                             elementInfo.actions.setFormToggle(false);
 
                         }}
                     >
                         Cancel
                     </button>
+                    {formType === "edit" ? (
+                        <button
+                            className={"delete-button"}
+                            onClick={() => {
+                                elementInfo.actions.removeMenuItem(elementInfo.buttonId);
+                                elementInfo.actions.removeMenuItem(formId)
+                                elementInfo.actions.setFormToggle(false);
+                            }}
+                        >
+                            Delete
+                        </button>
+                    ) : null}
+
                 </div>
             </form>
         </div>

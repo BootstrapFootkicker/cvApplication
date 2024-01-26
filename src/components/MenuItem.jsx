@@ -21,8 +21,6 @@ export function MenuItem({item, formToggle, toggleSetter}) {
                         <div className="gap"></div>
                         {/* eslint-disable-next-line react/prop-types */}
                         <FormTriggerButton buttonInfo={item.elementInfo}/>
-                        {/*<button className={'menu-button'}*/}
-                        {/*        onClick={item.trigger}>{item.name}</button>*/}
                         <div className="gap"></div>
                     </li>
                 ) : null}

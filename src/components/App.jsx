@@ -15,7 +15,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {InfoButton} from "./InfoButton.jsx";
 
 export function App() {
-    //todo change functions to have elementInfo:{} format!
+
 
     const [menuList, setMenuList] = useState([
         {
@@ -70,13 +70,29 @@ export function App() {
 
 
     function editMenuItem(buttonId, formId, elementInfo) {
-        removeMenuItem(buttonId);
+        const newItem = {
+            elementInfo: {
+                type: "button",
+                name: elementInfo.school,
+                id: uuid(),
+                trigger: createEditForm,
+                formInfo: elementInfo,
+            }
+        }
+
+        setMenuList((currentMenuList) => {
+            const updatedMenuList = currentMenuList.map((item) =>
+                item.elementInfo.id === buttonId ? newItem : item
+            );
+            return updatedMenuList;
+        });
+
         removeMenuItem(formId);
     }
 
 
     function formSubmit(formId, name, formInfo) {
-
+        console.log("formInfo", formInfo);
 
         addNewMenuItem({
             elementInfo: {
@@ -94,7 +110,9 @@ export function App() {
 
     function addNewMenuItem(item) {
         setMenuList((currentMenuList) => {
-            return [item, ...currentMenuList];
+            let newList = [...currentMenuList];
+            newList.splice(newList.length - 1, 0, item);
+            return newList;
         });
     }
 
