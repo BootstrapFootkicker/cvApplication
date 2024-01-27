@@ -1,9 +1,14 @@
 import {MenuItem} from "./MenuItem.jsx";
-import React from "react";
-
+import React, {useEffect} from "react";
 
 // eslint-disable-next-line react/prop-types
-export function MenuList({menuList, formToggle, toggleSetter, setMenuList}) {
+export function MenuList({menuList, formToggle, setMenuList, setFormToggle}) {
+
+
+// Inside MenuList component
+    useEffect(() => {
+        console.log(formToggle, "formToggle is changed");
+    }, [formToggle]);
     return (
         <ul className={'menu'}>
             {/* eslint-disable-next-line react/prop-types */}
@@ -11,7 +16,7 @@ export function MenuList({menuList, formToggle, toggleSetter, setMenuList}) {
                     // eslint-disable-next-line react/jsx-key
 
                     return (<MenuItem key={item.elementInfo.id} item={item} formToggle={formToggle}
-                                      toggleSetter={toggleSetter} setMenuList={setMenuList}/>)
+                                      setFormToggle={setFormToggle} setMenuList={setMenuList}/>)
                 }
             )}
         </ul>

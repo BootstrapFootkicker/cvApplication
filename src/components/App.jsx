@@ -4,7 +4,7 @@ import {useState} from "react";
 
 import {PersonalDetails} from "./PersonalDetails.jsx";
 import {EducationForm} from "./EducationForm.jsx";
-import ExperienceForm from "./ExperienceForm.jsx";
+import {ExperienceForm} from "./ExperienceForm.jsx";
 import {Dropdown} from "./Dropdown.jsx";
 import {v4 as uuid} from "uuid";
 import {
@@ -15,140 +15,249 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {InfoButton} from "./InfoButton.jsx";
 
 export function App() {
+//todo Pass formtoggle again to forms
 
-
-    const [menuList, setMenuList] = useState([
+    const [educationMenuList, setEducationMenuList] = useState([
         {
             elementInfo: {
                 type: "formButton",
+                formType: "education",
                 name: "+ Add Education",
-                trigger: educationTrigger,
+                trigger: formTrigger,
                 id: uuid(),
             },
         },
     ]);
-    const [formToggle, setFormToggle] = useState(false);
+    const [experienceMenuList, setExperienceMenuList] = useState([
+        {
+            elementInfo: {
+                type: "formButton",
+                formType: "experience",
+                name: "+ Add Experience",
+                trigger: formTrigger,
+                id: uuid(),
+            },
+        },
+    ]);
 
-    const [newItem, setNewItem] = useState(null);
 
-    useEffect(() => {
-        if (newItem) {
-            addNewMenuItem(newItem);
-            setNewItem(null); // reset newItem after adding
+    const [experienceFormToggle, setExperienceFormToggle] = useState(false);
+    const [educationFormToggle, setEducationFormToggle] = useState(false);
+
+
+    function resetMenuList(id, stateList) {
+        if (stateList === 'education') {
+            removeMenuItem(id, setEducationMenuList);
+        } else if (stateList === 'experience') {
+            removeMenuItem(id, setExperienceMenuList);
         }
-    }, [newItem]);
 
-
-    function resetMenuList(id) {
-        removeMenuItem(id);
     }
 
 
-    function createEditForm(buttonId, elementInfo) {
-        console.log("createEditForm is called");
-        toggleForm()
-        console.log(elementInfo.id)
-        const newItem = {
-            elementInfo: {
-                type: "form",
-                formType: "edit",
-                id: uuid(),
-                buttonId: elementInfo.id,
-                actions: {
-                    editMenuItem: editMenuItem,
-                    resetMenuList: resetMenuList,
-                    setFormToggle: setFormToggle,
-                    removeMenuItem: removeMenuItem,
-                    setMenuList: setMenuList
+    function createEditForm(buttonId, elementInfo, triggerType) {
+        toggleForm(triggerType);
+
+        if (triggerType === "education") {
+            const newItem = {
+                elementInfo: {
+                    type: "education-form",
+                    formType: "edit",
+                    id: uuid(),
+                    buttonId: elementInfo.id,
+                    actions: {
+                        editMenuItem: editMenuItem,
+                        resetMenuList: resetMenuList,
+                        setFormToggle: toggleForm,
+                        removeMenuItem: removeMenuItem,
+                        setMenuList: setEducationMenuList
+                    },
+                    elementInfo: elementInfo,
+                    formInfo: elementInfo.formInfo,
                 },
-                elementInfo: elementInfo,
-                formInfo: elementInfo.formInfo,
-            },
-        };
-        setNewItem(newItem); // set the new item to be added
-    }
+            };
+            addNewMenuItem(newItem, setEducationMenuList); // set the new item to be added
+        } else if (triggerType === "experience") {
+            const newItem = {
+                elementInfo: {
+                    type: "experience-form",
+                    formType: "edit",
+                    id: uuid(),
+                    buttonId: elementInfo.id,
+                    actions: {
+                        editMenuItem: editMenuItem,
+                        resetMenuList: resetMenuList,
+                        setFormToggle: toggleForm,
+                        removeMenuItem: removeMenuItem,
+                        setMenuList: setExperienceMenuList
+                    },
+                    elementInfo: elementInfo,
+                    formInfo: elementInfo.formInfo,
+                },
+            };
+            addNewMenuItem(newItem, setExperienceMenuList); // set the new item to be added
 
-
-    function editMenuItem(buttonId, formId, elementInfo) {
-        const newItem = {
-            elementInfo: {
-                type: "button",
-                name: elementInfo.school,
-                id: uuid(),
-                trigger: createEditForm,
-                formInfo: elementInfo,
-            }
         }
 
-        setMenuList((currentMenuList) => {
-            const updatedMenuList = currentMenuList.map((item) =>
-                item.elementInfo.id === buttonId ? newItem : item
-            );
-            return updatedMenuList;
-        });
-
-        removeMenuItem(formId);
-    }
-
-
-    function formSubmit(formId, name, formInfo) {
-        console.log("formInfo", formInfo);
-
-        addNewMenuItem({
-            elementInfo: {
-                type: "button",
-                name: name,
-                id: uuid(),
-                trigger: createEditForm,
-                formInfo: formInfo,
-            },
-        });
-
-        removeMenuItem(formId);
 
     }
 
-    function addNewMenuItem(item) {
-        setMenuList((currentMenuList) => {
+
+    function editMenuItem(buttonId, formId, elementInfo, triggerType) {
+        console.log("editMenuItem", buttonId, formId, elementInfo);
+
+
+        if (triggerType === "education") {
+
+            const newItem = {
+                elementInfo: {
+                    type: "button",
+                    name: elementInfo.school,
+                    id: uuid(),
+                    trigger: createEditForm,
+                    formInfo: elementInfo,
+                    triggerType: triggerType
+                }
+            }
+
+            setEducationMenuList((currentMenuList) => {
+                const updatedMenuList = currentMenuList.map((item) =>
+                    item.elementInfo.id === buttonId ? newItem : item
+                );
+                return updatedMenuList;
+            });
+
+
+        } else if (triggerType === "experience") {
+
+            const newItem = {
+                elementInfo: {
+                    type: "button",
+                    name: elementInfo.companyName,
+                    id: uuid(),
+                    trigger: createEditForm,
+                    formInfo: elementInfo,
+                    triggerType: triggerType
+                }
+            }
+            setExperienceMenuList((currentMenuList) => {
+                const updatedMenuList = currentMenuList.map((item) =>
+                    item.elementInfo.id === buttonId ? newItem : item
+                );
+                return updatedMenuList;
+            });
+
+
+        }
+    }
+
+
+    function formSubmit(formId, name, formInfo, triggerType) {
+
+        if (triggerType === "education") {
+
+            addNewMenuItem({
+                elementInfo: {
+                    type: "button",
+                    name: name,
+                    id: uuid(),
+                    trigger: createEditForm,
+                    formInfo: formInfo,
+                    triggerType: triggerType
+                },
+            }, setEducationMenuList);
+            removeMenuItem(formId, setEducationMenuList);
+
+        } else if (triggerType === "experience") {
+            addNewMenuItem({
+                elementInfo: {
+                    type: "button",
+                    name: name,
+                    id: uuid(),
+                    trigger: createEditForm,
+                    formInfo: formInfo,
+                    triggerType: triggerType
+                },
+            }, setExperienceMenuList);
+            removeMenuItem(formId, setExperienceMenuList);
+        }
+        toggleForm(triggerType)
+    }
+
+    function addNewMenuItem(item, stateList) {
+        stateList((currentMenuList) => {
             let newList = [...currentMenuList];
             newList.splice(newList.length - 1, 0, item);
             return newList;
         });
     }
 
-    function removeMenuItem(id) {
-        console.log('removeMenuItem start:', id, menuList);
-        setMenuList((currentMenuList) => {
+    function removeMenuItem(id, stateList) {
+        console.log(stateList, 'stateList')
+        stateList((currentMenuList) => {
             const updatedMenuList = currentMenuList.filter((item) => item.elementInfo.id !== id);
-            console.log('removeMenuItem end:', id, updatedMenuList);
             return updatedMenuList;
         });
     }
 
-
-    function educationTrigger() {
-        //todo Make this trigger apply to all forms
-        console.log("educationTrigger");
-        toggleForm();
+    function experienceTrigger() {
+        console.log("experienceTrigger");
+        toggleForm('experience');
         addNewMenuItem({
             elementInfo: {
-                type: "form",
+                type: "experience-form",
                 formType: "add",
                 id: uuid(),
                 actions: {
                     formSubmit: formSubmit,
                     resetMenuList: resetMenuList,
-                    setFormToggle: setFormToggle,
+                    toggleForm: toggleForm,
                     removeMenuItem: removeMenuItem,
-                    setMenuList: setMenuList
+                    setMenuList: setExperienceMenuList
                 },
             },
-        });
+        }, setExperienceMenuList);
     }
 
-    function toggleForm() {
-        console.log("toggleForm");
-        setFormToggle(!formToggle);
+    function educationFormTrigger() {
+        console.log("educationTrigger");
+        toggleForm('education');
+        addNewMenuItem({
+            elementInfo: {
+                type: "education-form",
+                formType: "add",
+                id: uuid(),
+                actions: {
+                    formSubmit: formSubmit,
+                    resetMenuList: resetMenuList,
+                    toggleForm: toggleForm,
+                    removeMenuItem: removeMenuItem,
+                    setMenuList: setEducationMenuList
+                },
+            },
+        }, setEducationMenuList);
+    }
+
+    function formTrigger(type) {
+        console.log("formTrigger");
+        if (type === "education") {
+            educationFormTrigger();
+        } else if (type === "experience") {
+            experienceTrigger();
+        }
+
+
+    }
+
+    function toggleForm(triggerType) {
+        console.log("toggleForm", triggerType);
+        if (triggerType === "education") {
+            setEducationFormToggle(!educationFormToggle);
+        } else if (triggerType === "experience") {
+            setExperienceFormToggle(!experienceFormToggle);
+        }
+
+
     }
 
     return (
@@ -157,11 +266,20 @@ export function App() {
             <Dropdown
                 sectionName={"Education"}
                 icon={faGraduationCap}
-                menuList={menuList}
-                formToggle={formToggle}
-                toggleSetter={setFormToggle}
+                menuList={educationMenuList}
+                formToggle={educationFormToggle}
+                setFormToggle={setEducationFormToggle}
+
             />
-            <button onClick={toggleForm}>test</button>
+            <Dropdown
+                sectionName={"Experience"}
+                icon={faBriefcase}
+                menuList={experienceMenuList}
+                formToggle={experienceFormToggle}
+                setFormToggle={setExperienceFormToggle}
+
+            />
+
 
             {/*<Dropdown sectionName={"Experience"} icon={faBriefcase} menuList ={menuList}/>*/}
         </>

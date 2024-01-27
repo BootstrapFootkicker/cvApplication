@@ -7,7 +7,8 @@ export function EducationForm({
                                   formType,
                                   formInfo,
                                   formId,
-                                  elementInfo
+                                  elementInfo,
+                                  setFormToggle
                               }
 ) {
 
@@ -28,6 +29,7 @@ export function EducationForm({
             setPlaceholder(formInfo.school || "");
         }
     }, [formType, formInfo]);
+
 
     return (
 
@@ -96,8 +98,9 @@ export function EducationForm({
                         className={"submit-button"}
                         type={"submit"}
                         onClick={() => {
-                            console.log('formId:', formId); // Log the formId
+
                             if (formType === "edit") {
+                                console.log(formId, 'edit Id', "EDIT!")
                                 elementInfo.actions.editMenuItem(elementInfo.buttonId, formId, {
                                     school: school,
                                     degree: degree,
@@ -105,9 +108,11 @@ export function EducationForm({
                                     endDate: endDate,
                                     schoolLocation: schoolLocation,
                                     formType: formType,
-                                });
-                            } else {
+                                }, 'education');
+                                elementInfo.actions.removeMenuItem(formId, elementInfo.actions.setMenuList);
 
+                            } else {
+                                console.log(formId, 'edit Id', "submit!", formType)
                                 elementInfo.actions.formSubmit(formId, school, {
                                     school: school,
                                     degree: degree,
@@ -115,10 +120,10 @@ export function EducationForm({
                                     endDate: endDate,
                                     schoolLocation: schoolLocation,
                                     formType: formType,
-                                });
+                                }, 'education');
                             }
-                            elementInfo.actions.setFormToggle(false);
-                            // }
+                            setFormToggle(false)
+
                         }}
                     >
                         Submit
@@ -126,9 +131,8 @@ export function EducationForm({
                     <button
                         className={"cancel-button"}
                         onClick={() => {
-                            elementInfo.actions.resetMenuList(formId);
-                            elementInfo.actions.removeMenuItem(elementInfo.buttonId);
-                            elementInfo.actions.setFormToggle(false);
+                            elementInfo.actions.resetMenuList(formId, 'education');
+                            setFormToggle(false)
 
                         }}
                     >
@@ -138,9 +142,9 @@ export function EducationForm({
                         <button
                             className={"delete-button"}
                             onClick={() => {
-                                elementInfo.actions.removeMenuItem(elementInfo.buttonId);
-                                elementInfo.actions.removeMenuItem(formId)
-                                elementInfo.actions.setFormToggle(false);
+                                elementInfo.actions.removeMenuItem(elementInfo.buttonId, elementInfo.actions.setMenuList);
+                                elementInfo.actions.removeMenuItem(formId, elementInfo.actions.setMenuList)
+                                setFormToggle(false)
                             }}
                         >
                             Delete

@@ -6,10 +6,11 @@ import {EducationForm} from "./EducationForm.jsx";
 import {act} from "react-dom/test-utils";
 import {MenuList} from "./MenuList.jsx";
 import {InfoButton} from "./InfoButton.jsx"
+import {ExperienceForm} from "./ExperienceForm.jsx";
 import {FormTriggerButton} from "./FormTriggerButton.jsx";
 
 // eslint-disable-next-line react/prop-types
-export function MenuItem({item, formToggle, toggleSetter}) {
+export function MenuItem({item, formToggle, setFormToggle}) {
 
     // eslint-disable-next-line react/prop-types
     if (item.elementInfo.type === "formButton") {
@@ -46,7 +47,7 @@ export function MenuItem({item, formToggle, toggleSetter}) {
         );
 
         // eslint-disable-next-line react/prop-types
-    } else if (item.elementInfo.type === "form") {
+    } else if (item.elementInfo.type === "education-form") {
         return (
             // eslint-disable-next-line react/prop-types
             <li key={item.elementInfo.id} className={"menu-item"}>
@@ -56,6 +57,21 @@ export function MenuItem({item, formToggle, toggleSetter}) {
                     formInfo={item.elementInfo.formInfo}
                     formId={item.elementInfo.id}
                     elementInfo={item.elementInfo}
+                    setFormToggle={setFormToggle}
+                />
+            </li>
+        );
+    } else if (item.elementInfo.type === "experience-form") {
+        return (
+            // eslint-disable-next-line react/prop-types
+            <li key={item.elementInfo.id} className={"menu-item"}>
+                {/* eslint-disable-next-line react/prop-types */}
+                <ExperienceForm
+                    formType={item.elementInfo.formType}
+                    formInfo={item.elementInfo.formInfo}
+                    formId={item.elementInfo.id}
+                    elementInfo={item.elementInfo}
+                    setFormToggle={setFormToggle}
                 />
             </li>
         );
