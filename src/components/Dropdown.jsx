@@ -23,9 +23,10 @@ export function Dropdown({
                 <div className={"button-content"}>
                     <div className={"icon-container"}>
                         <FontAwesomeIcon icon={icon}/>
+                        <p>{sectionName}</p>
                     </div>
 
-                    <p>{sectionName}</p>
+
                     <div className={"icon-container"}>
                         <FontAwesomeIcon icon={faChevronDown}/>
                     </div>

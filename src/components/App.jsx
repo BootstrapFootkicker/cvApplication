@@ -2,10 +2,12 @@ import React, {useEffect} from "react";
 import ReactDOM from "react-dom/client";
 import {useState} from "react";
 
+import '../forms.css';
 import {PersonalDetails} from "./PersonalDetails.jsx";
 import {EducationForm} from "./EducationForm.jsx";
 import {ExperienceForm} from "./ExperienceForm.jsx";
 import {Dropdown} from "./Dropdown.jsx";
+import {Resume} from "./Resume.jsx";
 import {v4 as uuid} from "uuid";
 import {
     faGraduationCap,
@@ -262,26 +264,29 @@ export function App() {
 
     return (
         <>
+            <div className={'details-container'}>
 
-            <Dropdown
-                sectionName={"Education"}
-                icon={faGraduationCap}
-                menuList={educationMenuList}
-                formToggle={educationFormToggle}
-                setFormToggle={setEducationFormToggle}
+                <PersonalDetails/>
+                <Dropdown
+                    sectionName={"Education"}
+                    icon={faGraduationCap}
+                    menuList={educationMenuList}
+                    formToggle={educationFormToggle}
+                    setFormToggle={setEducationFormToggle}
 
-            />
-            <Dropdown
-                sectionName={"Experience"}
-                icon={faBriefcase}
-                menuList={experienceMenuList}
-                formToggle={experienceFormToggle}
-                setFormToggle={setExperienceFormToggle}
+                />
+                <Dropdown
+                    sectionName={"Experience"}
+                    icon={faBriefcase}
+                    menuList={experienceMenuList}
+                    formToggle={experienceFormToggle}
+                    setFormToggle={setExperienceFormToggle}
 
-            />
+                />
 
 
-            {/*<Dropdown sectionName={"Experience"} icon={faBriefcase} menuList ={menuList}/>*/}
+            </div>
+            <Resume/>
         </>
     );
 }

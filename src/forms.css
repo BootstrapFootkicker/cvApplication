@@ -1,3 +1,17 @@
+.details-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    outline: solid 3px black;
+    min-height: 100%;
+    padding: 50px 20px 20px;
+    box-sizing: border-box;
+    width: 50%;
+
+}
+
+
 .personal-details,
 .education-form {
     display: flex;
@@ -5,6 +19,36 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+label {
+    width: 100%;
+
+}
+
+input {
+    width: 100%;
+    border-radius: 20px;
+    height: 40px;
+    background-color: #F3F4F6;
+
+}
+
+.personal-details {
+    min-height: 500px;
+    justify-content: space-between;
+}
+
+.personal-details-div {
+    padding: 30px;
+    font-size: 16px;
+    min-width: 500px;
+    min-height: 500px;
+    box-sizing: border-box;
+}
+
+#fullName {
+    width: 100%;
 }
 
 .date-container {
@@ -18,7 +62,8 @@
 .form-container {
     background-color: white;
     border-radius: 10px;
-    padding: 30px;
+    text-align: left;
+    /*padding: 30px;*/
 }
 
 .button-container {

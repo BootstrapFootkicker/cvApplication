@@ -33,6 +33,7 @@
     align-items: center;
     gap: 10px;
     min-height: 100%;
+    font-size: 20px;
 }
 
 
@@ -54,6 +55,7 @@
 
 
 }
+
 .button-content {
     display: flex;
     flex-direction: row;
@@ -69,7 +71,7 @@
     align-content: center;
     justify-content: center;
     gap: 15px;
-    width: 500px;
+    min-width: 500px;
     border-bottom: none;
 }
 
