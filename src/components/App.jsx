@@ -286,7 +286,7 @@ export function App() {
 
 
             </div>
-            <Resume/>
+            <Resume educationMenuList={educationMenuList} experienceMenuList={experienceMenuList}/>
         </>
     );
 }

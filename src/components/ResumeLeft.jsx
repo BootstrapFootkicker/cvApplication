@@ -3,6 +3,8 @@ import {useState} from "react";
 import '../resume.css';
 
 export function ResumeLeft() {
+    // Now you can use educationMenuList and experienceMenuList in this component
+    // Rest of your code
     return (
         <div className={"resume-left-container"}>
             <div className={'resume-left-name-container'}>
