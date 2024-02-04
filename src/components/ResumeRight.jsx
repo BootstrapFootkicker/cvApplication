@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useState} from "react";
 import '../resume.css';
 
-export function ResumeRight({educationMenuList, experienceMenuList}) {
+export function ResumeRight({educationMenuList, experienceMenuList, isSubmitted}) {
 
     return (
         <div className={"resume-right-container"}>

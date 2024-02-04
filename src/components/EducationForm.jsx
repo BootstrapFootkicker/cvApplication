@@ -19,6 +19,7 @@ export function EducationForm({
     const [schoolLocation, setLocation] = useState("");
     const [placeHolder, setPlaceholder] = useState("Your school..");
 
+
     useEffect(() => {
         if (formType === "edit") {
             setSchool(formInfo.school || "");
@@ -39,11 +40,37 @@ export function EducationForm({
                 className={"education-form"}
                 onSubmit={(e) => {
                     e.preventDefault();
+                    if (formType === "edit") {
+                        console.log(formId, 'edit Id', "EDIT!")
+                        elementInfo.actions.editMenuItem(elementInfo.buttonId, formId, {
+                            school: school,
+                            degree: degree,
+                            startDate: startDate,
+                            endDate: endDate,
+                            schoolLocation: schoolLocation,
+                            formType: formType,
+                        }, 'education');
+                        elementInfo.actions.removeMenuItem(formId, elementInfo.actions.setMenuList);
+
+                    } else {
+                        console.log(formId, 'edit Id', "submit!", formType)
+                        elementInfo.actions.formSubmit(formId, school, {
+                            school: school,
+                            degree: degree,
+                            startDate: startDate,
+                            endDate: endDate,
+                            schoolLocation: schoolLocation,
+                            formType: formType,
+                        }, 'education');
+                    }
+                    setFormToggle(false)
                 }}
             >
 
+
                 <label htmlFor="school">School</label>
                 <input
+                    required
                     type={"text"}
                     id={"school"}
                     name={"school"}
@@ -54,6 +81,7 @@ export function EducationForm({
 
                 <label htmlFor="degree">Degree</label>
                 <input
+                    required
                     type={"text"}
                     id={"degree"}
                     name={"degree"}
@@ -65,6 +93,7 @@ export function EducationForm({
                 <div className={"date-container"}>
                     <label htmlFor="startDate">Start Date</label>
                     <input
+                        required
                         type={"date"}
                         id={"startDate"}
                         name={"startDate"}
@@ -75,6 +104,7 @@ export function EducationForm({
 
                     <label htmlFor="endDate">End Date</label>
                     <input
+                        required
                         type={"date"}
                         id={"endDate"}
                         name={"endDate"}
@@ -86,6 +116,7 @@ export function EducationForm({
 
                 <label htmlFor="schoolLocation">School Location</label>
                 <input
+                    required
                     type={"text"}
                     id={"schoolLocation"}
                     name={"schoolLocation"}
@@ -93,38 +124,12 @@ export function EducationForm({
                     value={schoolLocation}
                     onChange={(e) => setLocation(e.target.value)}
                 ></input>
+
+
                 <div className={"button-container"}>
                     <button
                         className={"submit-button"}
                         type={"submit"}
-                        onClick={() => {
-
-                            if (formType === "edit") {
-                                console.log(formId, 'edit Id', "EDIT!")
-                                elementInfo.actions.editMenuItem(elementInfo.buttonId, formId, {
-                                    school: school,
-                                    degree: degree,
-                                    startDate: startDate,
-                                    endDate: endDate,
-                                    schoolLocation: schoolLocation,
-                                    formType: formType,
-                                }, 'education');
-                                elementInfo.actions.removeMenuItem(formId, elementInfo.actions.setMenuList);
-
-                            } else {
-                                console.log(formId, 'edit Id', "submit!", formType)
-                                elementInfo.actions.formSubmit(formId, school, {
-                                    school: school,
-                                    degree: degree,
-                                    startDate: startDate,
-                                    endDate: endDate,
-                                    schoolLocation: schoolLocation,
-                                    formType: formType,
-                                }, 'education');
-                            }
-                            setFormToggle(false)
-
-                        }}
                     >
                         Submit
                     </button>

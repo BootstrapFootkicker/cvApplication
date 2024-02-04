@@ -4,8 +4,6 @@ import {useState} from "react";
 
 import '../forms.css';
 import {PersonalDetails} from "./PersonalDetails.jsx";
-import {EducationForm} from "./EducationForm.jsx";
-import {ExperienceForm} from "./ExperienceForm.jsx";
 import {Dropdown} from "./Dropdown.jsx";
 import {Resume} from "./Resume.jsx";
 import {v4 as uuid} from "uuid";
@@ -16,8 +14,12 @@ import {
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {InfoButton} from "./InfoButton.jsx";
 
+
 export function App() {
-//todo Pass formtoggle again to forms
+//todo figure out how to populate second statelist only when form is submitted. Investigate forms
+    //todo change edit and delete to reflect formsubmit change
+    //todo verify formsubmit change is working completely
+
 
     const [educationMenuList, setEducationMenuList] = useState([
         {
@@ -45,7 +47,14 @@ export function App() {
 
     const [experienceFormToggle, setExperienceFormToggle] = useState(false);
     const [educationFormToggle, setEducationFormToggle] = useState(false);
+    const [resumeEducationList, setResumeEducationList] = useState([]);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
+    useEffect(() => {
+            console.log("educationMenuList", resumeEducationList)
+
+        }
+        , [resumeEducationList]);
 
     function resetMenuList(id, stateList) {
         if (stateList === 'education') {
@@ -168,7 +177,19 @@ export function App() {
                     triggerType: triggerType
                 },
             }, setEducationMenuList);
+            addNewMenuItem({
+                elementInfo: {
+                    type: "button",
+                    name: name,
+                    id: uuid(),
+                    trigger: createEditForm,
+                    formInfo: formInfo,
+                    triggerType: triggerType
+                },
+            }, setResumeEducationList);
+
             removeMenuItem(formId, setEducationMenuList);
+
 
         } else if (triggerType === "experience") {
             addNewMenuItem({
@@ -192,6 +213,8 @@ export function App() {
             newList.splice(newList.length - 1, 0, item);
             return newList;
         });
+
+
     }
 
     function removeMenuItem(id, stateList) {
@@ -286,7 +309,8 @@ export function App() {
 
 
             </div>
-            <Resume educationMenuList={educationMenuList} experienceMenuList={experienceMenuList}/>
+            <Resume educationMenuList={resumeEducationList} experienceMenuList={experienceMenuList}
+                    isSubmitted={isSubmitted}/>
         </>
     );
 }

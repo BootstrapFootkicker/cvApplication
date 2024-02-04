@@ -28,10 +28,38 @@ export function ExperienceForm({formType, formInfo, formId, elementInfo, setForm
 
                   onSubmit={(e) => {
                       e.preventDefault();
+                      if (formType === "edit") {
+                          elementInfo.actions.editMenuItem(elementInfo.buttonId, formId, {
+                              companyName: companyName,
+                              position: position,
+                              startDate: startDate,
+                              endDate: endDate,
+                              workLocation: workLocation,
+                              description: description,
+                              formType: formType,
+                          }, 'experience');
+                          elementInfo.actions.removeMenuItem(formId, elementInfo.actions.setMenuList);
+
+                      } else {
+
+                          elementInfo.actions.formSubmit(formId, companyName, {
+                              companyName: companyName,
+                              position: position,
+                              startDate: startDate,
+                              endDate: endDate,
+                              workLocation: workLocation,
+                              description: description,
+                              formType: formType,
+                          }, 'experience');
+                      }
+                      setFormToggle(false);
+
+
                   }}>
                 <div className={"input-group"}>
                     <label htmlFor="companyName">Company Name</label>
                     <input
+                        required
                         type={"text"}
                         id={"companyName"}
                         name={"companyName"}
@@ -39,10 +67,10 @@ export function ExperienceForm({formType, formInfo, formId, elementInfo, setForm
                         value={companyName}
                         onChange={(e) => setCompanyName(e.target.value)}
                     ></input>
-                </div>
-                <div className={"input-group"}>
+
                     <label htmlFor="position">Position</label>
                     <input
+                        required
                         type={"text"}
                         id={"position"}
                         name={"position"}
@@ -50,11 +78,11 @@ export function ExperienceForm({formType, formInfo, formId, elementInfo, setForm
                         value={position}
                         onChange={(e) => setPosition(e.target.value)}
                     ></input>
-                </div>
-                <div className="date-container">
-                    <div className={"input-group"}>
+
+                    <div className={"date-container"}>
                         <label htmlFor="startDate">Start Date</label>
                         <input
+                            required
                             type={"date"}
                             id={"startDate"}
                             name={"startDate"}
@@ -62,11 +90,10 @@ export function ExperienceForm({formType, formInfo, formId, elementInfo, setForm
                             value={startDate}
                             onChange={(e) => setStartDate(e.target.value)}
                         ></input>
-                    </div>
 
-                    <div className={"input-group"}>
                         <label htmlFor="endDate">End Date</label>
                         <input
+                            required
                             type={"date"}
                             id={"endDate"}
                             name={"endDate"}
@@ -75,10 +102,10 @@ export function ExperienceForm({formType, formInfo, formId, elementInfo, setForm
                             onChange={(e) => setEndDate(e.target.value)}
                         ></input>
                     </div>
-                </div>
-                <div className={"input-group"}>
+
                     <label htmlFor="workLocation">Work Location</label>
                     <input
+                        required
                         type={"text"}
                         id={"workLocation"}
                         name={"workLocation"}
@@ -86,10 +113,10 @@ export function ExperienceForm({formType, formInfo, formId, elementInfo, setForm
                         value={workLocation}
                         onChange={(e) => setLocation(e.target.value)}
                     ></input>
-                </div>
-                <div className={"input-group"}>
+
                     <label htmlFor="description">Description</label>
                     <input
+                        required
                         type={"text"}
                         id={"description"}
                         name={"description"}
@@ -97,41 +124,16 @@ export function ExperienceForm({formType, formInfo, formId, elementInfo, setForm
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     ></input>
+
+
                 </div>
 
                 <div className={"button-container"}>
                     <button
                         className={"submit-button"}
                         type={"submit"}
-                        onClick={() => {
 
-                            if (formType === "edit") {
-                                elementInfo.actions.editMenuItem(elementInfo.buttonId, formId, {
-                                    companyName: companyName,
-                                    position: position,
-                                    startDate: startDate,
-                                    endDate: endDate,
-                                    workLocation: workLocation,
-                                    description: description,
-                                    formType: formType,
-                                }, 'experience');
-                                elementInfo.actions.removeMenuItem(formId, elementInfo.actions.setMenuList);
 
-                            } else {
-
-                                elementInfo.actions.formSubmit(formId, companyName, {
-                                    companyName: companyName,
-                                    position: position,
-                                    startDate: startDate,
-                                    endDate: endDate,
-                                    workLocation: workLocation,
-                                    description: description,
-                                    formType: formType,
-                                }, 'experience');
-                            }
-                            setFormToggle(false);
-
-                        }}
                     >
                         Submit
                     </button>
