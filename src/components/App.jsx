@@ -48,13 +48,11 @@ export function App() {
     const [experienceFormToggle, setExperienceFormToggle] = useState(false);
     const [educationFormToggle, setEducationFormToggle] = useState(false);
     const [resumeEducationList, setResumeEducationList] = useState([]);
-    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [resumeExperienceList, setResumeExperienceList] = useState([]);
 
     useEffect(() => {
-            console.log("educationMenuList", resumeEducationList)
-
-        }
-        , [resumeEducationList]);
+        console.log(resumeEducationList);
+    }, [resumeEducationList]);
 
     function resetMenuList(id, stateList) {
         if (stateList === 'education') {
@@ -138,6 +136,8 @@ export function App() {
                 return updatedMenuList;
             });
 
+            setResumeEducationList([...educationMenuList, newItem])
+
 
         } else if (triggerType === "experience") {
 
@@ -164,47 +164,40 @@ export function App() {
 
 
     function formSubmit(formId, name, formInfo, triggerType) {
+        let newItem = {
+            elementInfo: {
+                type: "button",
+                name: name,
+                id: uuid(),
+                trigger: createEditForm,
+                formInfo: formInfo,
+                triggerType: triggerType
+            },
+        };
 
         if (triggerType === "education") {
+            setEducationMenuList((currentMenuList) => {
+                let updatedMenuList = [...currentMenuList];
+                updatedMenuList.splice(updatedMenuList.length - 1, 0, newItem);
 
-            addNewMenuItem({
-                elementInfo: {
-                    type: "button",
-                    name: name,
-                    id: uuid(),
-                    trigger: createEditForm,
-                    formInfo: formInfo,
-                    triggerType: triggerType
-                },
-            }, setEducationMenuList);
-            addNewMenuItem({
-                elementInfo: {
-                    type: "button",
-                    name: name,
-                    id: uuid(),
-                    trigger: createEditForm,
-                    formInfo: formInfo,
-                    triggerType: triggerType
-                },
-            }, setResumeEducationList);
+                setResumeEducationList(updatedMenuList);
 
+                return updatedMenuList;
+            });
             removeMenuItem(formId, setEducationMenuList);
-
-
+            toggleForm(triggerType);
         } else if (triggerType === "experience") {
-            addNewMenuItem({
-                elementInfo: {
-                    type: "button",
-                    name: name,
-                    id: uuid(),
-                    trigger: createEditForm,
-                    formInfo: formInfo,
-                    triggerType: triggerType
-                },
-            }, setExperienceMenuList);
+            setExperienceMenuList((currentMenuList) => {
+                let updatedMenuList = [...currentMenuList];
+                updatedMenuList.splice(updatedMenuList.length - 1, 0, newItem);
+
+                setResumeExperienceList(updatedMenuList)
+
+                return updatedMenuList;
+            });
             removeMenuItem(formId, setExperienceMenuList);
+            toggleForm(triggerType);
         }
-        toggleForm(triggerType)
     }
 
     function addNewMenuItem(item, stateList) {
@@ -221,6 +214,11 @@ export function App() {
         console.log(stateList, 'stateList')
         stateList((currentMenuList) => {
             const updatedMenuList = currentMenuList.filter((item) => item.elementInfo.id !== id);
+            if (stateList === setEducationMenuList) {
+                setResumeEducationList(updatedMenuList);
+            } else if (stateList === setExperienceMenuList) {
+                setResumeExperienceList(updatedMenuList);
+            }
             return updatedMenuList;
         });
     }
@@ -309,8 +307,8 @@ export function App() {
 
 
             </div>
-            <Resume educationMenuList={resumeEducationList} experienceMenuList={experienceMenuList}
-                    isSubmitted={isSubmitted}/>
+            <Resume educationMenuList={resumeEducationList} experienceMenuList={resumeExperienceList}
+            />
         </>
     );
 }

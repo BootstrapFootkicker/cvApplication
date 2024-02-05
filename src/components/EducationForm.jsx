@@ -66,66 +66,66 @@ export function EducationForm({
                     setFormToggle(false)
                 }}
             >
+                <div className={"input-group"}>
 
-
-                <label htmlFor="school">School</label>
-                <input
-                    required
-                    type={"text"}
-                    id={"school"}
-                    name={"school"}
-                    placeholder={placeHolder}
-                    value={school}
-                    onChange={(e) => setSchool(e.target.value)}
-                ></input>
-
-                <label htmlFor="degree">Degree</label>
-                <input
-                    required
-                    type={"text"}
-                    id={"degree"}
-                    name={"degree"}
-                    placeholder={"Your degree.."}
-                    value={degree}
-                    onChange={(e) => setDegree(e.target.value)}
-                ></input>
-
-                <div className={"date-container"}>
-                    <label htmlFor="startDate">Start Date</label>
+                    <label htmlFor="school">School</label>
                     <input
                         required
-                        type={"date"}
-                        id={"startDate"}
-                        name={"startDate"}
-                        placeholder={"Your start date.."}
-                        value={startDate}
-                        onChange={(e) => setStartDate(e.target.value)}
+                        type={"text"}
+                        id={"school"}
+                        name={"school"}
+                        placeholder={placeHolder}
+                        value={school}
+                        onChange={(e) => setSchool(e.target.value)}
                     ></input>
 
-                    <label htmlFor="endDate">End Date</label>
+                    <label htmlFor="degree">Degree</label>
                     <input
                         required
-                        type={"date"}
-                        id={"endDate"}
-                        name={"endDate"}
-                        placeholder={"Your end date.."}
-                        value={endDate}
-                        onChange={(e) => setEndDate(e.target.value)}
+                        type={"text"}
+                        id={"degree"}
+                        name={"degree"}
+                        placeholder={"Your degree.."}
+                        value={degree}
+                        onChange={(e) => setDegree(e.target.value)}
                     ></input>
+
+                    <div className={"date-container"}>
+                        <label htmlFor="startDate">Start Date</label>
+                        <input
+                            required
+                            type={"date"}
+                            id={"startDate"}
+                            name={"startDate"}
+                            placeholder={"Your start date.."}
+                            value={startDate}
+                            onChange={(e) => setStartDate(e.target.value)}
+                        ></input>
+
+                        <label htmlFor="endDate">End Date</label>
+                        <input
+                            required
+                            type={"date"}
+                            id={"endDate"}
+                            name={"endDate"}
+                            placeholder={"Your end date.."}
+                            value={endDate}
+                            onChange={(e) => setEndDate(e.target.value)}
+                        ></input>
+                    </div>
+
+                    <label htmlFor="schoolLocation">School Location</label>
+                    <input
+                        required
+                        type={"text"}
+                        id={"schoolLocation"}
+                        name={"schoolLocation"}
+                        placeholder={"Your school location.."}
+                        value={schoolLocation}
+                        onChange={(e) => setLocation(e.target.value)}
+                    ></input>
+
                 </div>
-
-                <label htmlFor="schoolLocation">School Location</label>
-                <input
-                    required
-                    type={"text"}
-                    id={"schoolLocation"}
-                    name={"schoolLocation"}
-                    placeholder={"Your school location.."}
-                    value={schoolLocation}
-                    onChange={(e) => setLocation(e.target.value)}
-                ></input>
-
-
                 <div className={"button-container"}>
                     <button
                         className={"submit-button"}

@@ -13,12 +13,16 @@
 
 
 .personal-details,
-.education-form {
+.education-form,
+.experience-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
+    min-width: 500px;
+    padding: 50px 20px 20px; /* Adjust the padding as needed */
+    box-sizing: border-box;
 }
 
 label {
@@ -63,7 +67,12 @@ input {
     background-color: white;
     border-radius: 10px;
     text-align: left;
-    /*padding: 30px;*/
+    min-width: 500px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+
+
 }
 
 .button-container {

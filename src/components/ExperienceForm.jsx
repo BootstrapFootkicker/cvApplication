@@ -24,7 +24,7 @@ export function ExperienceForm({formType, formInfo, formId, elementInfo, setForm
 
     return (
         <div className={"form-container"}>
-            <form className={"education-form"}
+            <form className={"experience-form"}
 
                   onSubmit={(e) => {
                       e.preventDefault();

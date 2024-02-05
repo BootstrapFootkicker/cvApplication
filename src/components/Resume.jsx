@@ -4,13 +4,13 @@ import {ResumeLeft} from "./ResumeLeft.jsx";
 import {ResumeRight} from "./ResumeRight.jsx";
 import '../resume.css';
 
-export function Resume({educationMenuList, experienceMenuList, isSubmitted}) {
+export function Resume({educationMenuList, experienceMenuList}) {
 
     return (
         <div className={"resume-container"}>
             <ResumeLeft/>
             <ResumeRight educationMenuList={educationMenuList} experienceMenuList={experienceMenuList}
-                         isSubmitted={isSubmitted}/>
+            />
         </div>
 
     )
