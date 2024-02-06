@@ -1,30 +1,125 @@
+/*todo: add media queries for mobile responsiveness*/
+/*todo: figure out how to style bullet points */
+/*todo: add borders*/
 .resume-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 5px;
-    outline: solid 3px black;
+    /*gap: 5px;*/
     height: 100%;
     padding: 50px 20px 20px;
     box-sizing: border-box;
     width: 50%;
 }
 
+.resume-left-name-container {
+    text-align: center;
+
+}
+
+.full-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    word-break: break-word;
+}
+
+.bullet-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+
+}
+
+.bar-divider {
+    width: 100%;
+    height: 5px;
+    display: flex;
+
+}
+
+.bar-divider-left {
+    background-color: grey;
+    width: 50%;
+    height: 100%;
+}
+
+.bar-divider-right {
+    background-color: black;
+    width: 50%;
+    height: 100%;
+}
+
 .resume-left-container {
-    outline: solid red 3px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    padding: 20px;
     height: 100%;
     width: 45%;
     background-image: url('./assets/professional.jpg');
     background-size: cover; /* or use 'contain' if you want to see the whole image */
     background-repeat: no-repeat; /* prevent image from repeating */
     background-position: center; /* center the image */
+    box-sizing: border-box;
+    color: white;
 
 
+}
+
+.personal-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.education, .bullet-list, .experience {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.experience-info, .education-info {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    width: 100%;
+}
+
+.school-name {
+    margin: 0;
+}
+
+
+.time-location-div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 65%;
+    align-content: center;
+    justify-content: center;
+
+}
+
+.job-name {
+    margin: 0;
+}
+
+.job-info-div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+    align-content: flex-start;
+    justify-content: center;
 }
 
 .resume-right-container {
@@ -33,17 +128,19 @@
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
-    border-left: black 1px solid;
     width: 55%;
     height: 100%;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .links-div {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
+    width: 100%;
 
 }
 
@@ -54,5 +151,25 @@
     align-items: center;
     gap: 20px;
 
+}
+
+.contact-title {
+
+    text-align: left;
+    width: 100%;
+}
+
+.address-div {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.address-title {
+    font-weight: bold;
+    text-align: left;
+    width: 100%;
 }
 
