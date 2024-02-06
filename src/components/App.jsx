@@ -16,9 +16,11 @@ import {InfoButton} from "./InfoButton.jsx";
 
 
 export function App() {
-//todo figure out how to populate second statelist only when form is submitted. Investigate forms
-    //todo change edit and delete to reflect formsubmit change
-    //todo verify formsubmit change is working completely
+
+    const [fullName, setFullName] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
+    const [address, setAddress] = useState("");
 
 
     const [educationMenuList, setEducationMenuList] = useState([
@@ -287,7 +289,17 @@ export function App() {
         <>
             <div className={'details-container'}>
 
-                <PersonalDetails/>
+                <PersonalDetails
+                    fullName={fullName}
+                    setFullName={setFullName}
+                    email={email}
+                    setEmail={setEmail}
+                    phone={phone}
+                    setPhone={setPhone}
+                    address={address}
+                    setAddress={setAddress}
+                />
+
                 <Dropdown
                     sectionName={"Education"}
                     icon={faGraduationCap}
@@ -308,6 +320,7 @@ export function App() {
 
             </div>
             <Resume educationMenuList={resumeEducationList} experienceMenuList={resumeExperienceList}
+                    fullName={fullName} email={email} phone={phone} address={address}
             />
         </>
     );

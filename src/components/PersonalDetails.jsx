@@ -2,11 +2,8 @@ import React from "react";
 import {useState} from "react";
 import "../forms.css";
 
-export function PersonalDetails() {
-    const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [address, setAddress] = useState("");
+export function PersonalDetails({fullName, email, phone, address, setAddress, setEmail, setFullName, setPhone}) {
+
 
     return (
         <div className={"form-container personal-details-div"}>
@@ -22,7 +19,6 @@ export function PersonalDetails() {
                     id="fullName"
                     name="fullName"
                     placeholder="Your name.."
-                    value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
                 ></input>
 
@@ -32,7 +28,6 @@ export function PersonalDetails() {
                     id="email"
                     name="email"
                     placeholder="Your email.."
-                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 ></input>
 
@@ -52,7 +47,6 @@ export function PersonalDetails() {
                     id="address"
                     name="address"
                     placeholder="Your address.."
-                    value={address}
                     onChange={(e) => setAddress(e.target.value)}
                 ></input>
             </form>

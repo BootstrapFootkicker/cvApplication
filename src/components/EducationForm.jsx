@@ -91,27 +91,30 @@ export function EducationForm({
                     ></input>
 
                     <div className={"date-container"}>
-                        <label htmlFor="startDate">Start Date</label>
-                        <input
-                            required
-                            type={"date"}
-                            id={"startDate"}
-                            name={"startDate"}
-                            placeholder={"Your start date.."}
-                            value={startDate}
-                            onChange={(e) => setStartDate(e.target.value)}
-                        ></input>
-
-                        <label htmlFor="endDate">End Date</label>
-                        <input
-                            required
-                            type={"date"}
-                            id={"endDate"}
-                            name={"endDate"}
-                            placeholder={"Your end date.."}
-                            value={endDate}
-                            onChange={(e) => setEndDate(e.target.value)}
-                        ></input>
+                        <div className={'date-input'}>
+                            <label htmlFor="startDate">Start Date</label>
+                            <input
+                                required
+                                type={"date"}
+                                id={"startDate"}
+                                name={"startDate"}
+                                placeholder={"Your start date.."}
+                                value={startDate}
+                                onChange={(e) => setStartDate(e.target.value)}
+                            ></input>
+                        </div>
+                        <div className={'date-input'}>
+                            <label htmlFor="endDate">End Date</label>
+                            <input
+                                required
+                                type={"date"}
+                                id={"endDate"}
+                                name={"endDate"}
+                                placeholder={"Your end date.."}
+                                value={endDate}
+                                onChange={(e) => setEndDate(e.target.value)}
+                            ></input>
+                        </div>
                     </div>
 
                     <label htmlFor="schoolLocation">School Location</label>
