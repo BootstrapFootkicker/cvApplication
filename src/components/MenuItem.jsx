@@ -1,10 +1,7 @@
 import React from "react";
-import {useState} from "react";
-import "../forms.css";
-import "../dropDown.css";
+import "../styles/forms.css";
+import "../styles/dropDown.css";
 import {EducationForm} from "./EducationForm.jsx";
-import {act} from "react-dom/test-utils";
-import {MenuList} from "./MenuList.jsx";
 import {InfoButton} from "./InfoButton.jsx"
 import {ExperienceForm} from "./ExperienceForm.jsx";
 import {FormTriggerButton} from "./FormTriggerButton.jsx";
@@ -22,7 +19,7 @@ export function MenuItem({item, formToggle, setFormToggle}) {
                         <div className="gap"></div>
                         {/* eslint-disable-next-line react/prop-types */}
                         <FormTriggerButton buttonInfo={item.elementInfo}/>
-                        <div className="gap"></div>
+
                     </li>
                 ) : null}
             </>
@@ -40,7 +37,7 @@ export function MenuItem({item, formToggle, setFormToggle}) {
 
                         <InfoButton elementInfo={item.elementInfo}/>
 
-                        <div className="gap"></div>
+
                     </li>
                 ) : null}
             </>

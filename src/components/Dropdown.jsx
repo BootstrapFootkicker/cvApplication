@@ -1,6 +1,6 @@
 import React from "react";
 import {useState} from "react";
-import "../dropDown.css";
+import "../styles/dropDown.css";
 import {faChevronDown} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {MenuList} from "./MenuList.jsx";

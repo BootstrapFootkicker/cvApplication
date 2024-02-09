@@ -1,6 +1,6 @@
 import React from "react";
 import {useState} from "react";
-import "../forms.css";
+import "../styles/forms.css";
 
 export function PersonalDetails({fullName, email, phone, address, setAddress, setEmail, setFullName, setPhone}) {
 

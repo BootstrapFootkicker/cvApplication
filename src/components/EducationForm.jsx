@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useState} from "react";
-import "../forms.css";
+import "../styles/forms.css";
 
 
 export function EducationForm({

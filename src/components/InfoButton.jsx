@@ -1,6 +1,6 @@
 import React from "react";
 import {useState} from "react";
-import "../dropDown.css";
+import "../styles/dropDown.css";
 
 export function InfoButton({elementInfo}) {
     // function buttonTrigger() {

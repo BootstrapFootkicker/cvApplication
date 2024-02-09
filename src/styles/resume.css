@@ -9,7 +9,14 @@
     height: 100%;
     padding: 50px 20px 20px;
     box-sizing: border-box;
-    width: 50%;
+
+}
+
+.styled-separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20PX;
 }
 
 .resume-left-name-container {
@@ -61,7 +68,7 @@
     padding: 20px;
     height: 100%;
     width: 45%;
-    background-image: url('./assets/professional.jpg');
+    background-image: url('../assets/professional.jpg');
     background-size: cover; /* or use 'contain' if you want to see the whole image */
     background-repeat: no-repeat; /* prevent image from repeating */
     background-position: center; /* center the image */
@@ -71,13 +78,17 @@
 
 }
 
+.skills {
+    width: 100%;
+}
+
 .personal-info-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 20px;
-    width: 100%;
+    width: 70%;
 }
 
 .education, .bullet-list, .experience {
@@ -103,23 +114,33 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    width: 65%;
+    /*width: 65%;*/
     align-content: center;
     justify-content: center;
 
 }
 
+
 .job-name {
     margin: 0;
+}
+
+.about-me {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-content: center;
+    justify-content: center;
 }
 
 .job-info-div {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    width: 100%;
+    /*width: 100%;*/
     align-content: flex-start;
     justify-content: center;
+
 }
 
 .resume-right-container {

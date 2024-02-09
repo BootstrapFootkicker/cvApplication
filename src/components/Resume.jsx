@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import {useState} from "react";
 import {ResumeLeft} from "./ResumeLeft.jsx";
 import {ResumeRight} from "./ResumeRight.jsx";
-import '../resume.css';
+import '../styles/resume.css';
 
 export function Resume({educationMenuList, experienceMenuList, fullName, email, phone, address,}) {
 

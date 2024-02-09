@@ -1,8 +1,6 @@
 import React, {useEffect} from "react";
-import ReactDOM from "react-dom/client";
 import {useState} from "react";
-
-import '../forms.css';
+import '../styles/forms.css';
 import {PersonalDetails} from "./PersonalDetails.jsx";
 import {Dropdown} from "./Dropdown.jsx";
 import {Resume} from "./Resume.jsx";
@@ -11,8 +9,9 @@ import {
     faGraduationCap,
     faBriefcase,
 } from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {InfoButton} from "./InfoButton.jsx";
+
+
+//todo: revisit responsiveness!
 
 
 export function App() {

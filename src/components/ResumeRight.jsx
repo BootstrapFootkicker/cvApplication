@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useState} from "react";
-import '../resume.css';
+import '../styles/resume.css';
 
 export function ResumeRight({educationMenuList, experienceMenuList}) {
 
@@ -19,14 +19,19 @@ export function ResumeRight({educationMenuList, experienceMenuList}) {
                             <li className={'education-info'} key={item.elementInfo.id}>
                                 <div className={'time-location-div'}>
                                     <div className={'education-date'}>
-                                        {item.elementInfo.formInfo ? item.elementInfo.formInfo.startDate + " - "
-                                            + item.elementInfo.formInfo.endDate
+                                        {item.elementInfo.formInfo ? item.elementInfo.formInfo.startDate.substring(0, 4) + " - "
+                                            + item.elementInfo.formInfo.endDate.substring(0, 4)
                                             : ''}
                                     </div>
 
                                     <div className={'school-location'}>
                                         {item.elementInfo.formInfo ? item.elementInfo.formInfo.schoolLocation : ""}
                                     </div>
+                                </div>
+
+                                <div className={'styled-separator'}>
+
+                                    |
                                 </div>
                                 <div className={'job-info-div'}>
                                     <h1 className={'school-name'}>
@@ -57,9 +62,9 @@ export function ResumeRight({educationMenuList, experienceMenuList}) {
                                 <div className={'time-location-div'}>
                                     <div
                                         className={'experience-date'}>
-                                        {item.elementInfo.formInfo ? item.elementInfo.formInfo.startDate
+                                        {item.elementInfo.formInfo ? item.elementInfo.formInfo.startDate.substring(0, 4)
                                             + " - "
-                                            + item.elementInfo.formInfo.endDate
+                                            + item.elementInfo.formInfo.endDate.substring(0, 4)
                                             : ''}
                                     </div>
                                     <div className={'work-location'}>
@@ -82,7 +87,11 @@ export function ResumeRight({educationMenuList, experienceMenuList}) {
                 </ul>
             </div>
             <div className={'skills'}>
-                Skills stuff
+                <div className={'bar-divider'}>
+                    <div className={'bar-divider-left'}></div>
+                    <div className={'bar-divider-right'}></div>
+                </div>
+                <h1>Skills</h1>
             </div>
             <div className={'Notes'}>
                 Notes stuff

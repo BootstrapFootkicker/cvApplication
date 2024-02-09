@@ -1,12 +1,11 @@
 .details-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 30px;
-    min-height: 100%;
+    height: 100%;
     padding: 50px 20px 20px;
     box-sizing: border-box;
-    width: 50%;
+
 
 }
 
@@ -19,7 +18,7 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    min-width: 500px;
+    width: 500px;
     padding: 50px 20px 20px; /* Adjust the padding as needed */
     box-sizing: border-box;
 }
@@ -45,14 +44,16 @@ input {
 }
 
 .personal-details {
-    min-height: 500px;
+    /*min-height: 500px;*/
+
     justify-content: space-between;
 }
 
 .personal-details-div {
     padding: 30px;
     font-size: 16px;
-    min-width: 500px;
+
+    width: 500px;
     min-height: 500px;
     box-sizing: border-box;
 }
@@ -81,7 +82,7 @@ input {
     background-color: white;
     border-radius: 10px;
     text-align: left;
-    min-width: 500px;
+    width: 565px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -98,3 +99,34 @@ input {
 }
 
 
+@media (max-width: 1200px) {
+    .form-container {
+        width: 400px;
+    }
+
+    .personal-details,
+    .education-form,
+    .experience-form {
+        width: 400px;
+    }
+
+    .personal-details-div {
+        width: 400px;
+    }
+}
+
+@media (max-width: 600px) {
+    .form-container {
+        width: 200px;
+    }
+
+    .personal-details,
+    .education-form,
+    .experience-form {
+        width: 200px;
+    }
+
+    .personal-details-div {
+        width: 200px;
+    }
+}

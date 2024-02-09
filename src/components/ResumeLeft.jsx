@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
-import {useState} from "react";
-import '../resume.css';
+import {faPhoneSquare as phoneIcon, faEnvelope as emailIcon} from '@fortawesome/free-solid-svg-icons';
+import '../styles/resume.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export function ResumeLeft({fullName, email, phone, address}) {
     // Now you can use educationMenuList and experienceMenuList in this component
@@ -28,9 +29,9 @@ export function ResumeLeft({fullName, email, phone, address}) {
                 </div>
 
                 <div className={'links-div'}>
-                    <span><div>PlaceHolder Image</div>
+                    <span><div><FontAwesomeIcon icon={phoneIcon}/></div>
                         {phone}</span>
-                    <span><div>PlaceHolder Image</div>
+                    <span><div><FontAwesomeIcon icon={emailIcon}/></div>
                         {email}</span>
 
                 </div>
