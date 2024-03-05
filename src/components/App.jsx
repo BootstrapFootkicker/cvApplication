@@ -51,9 +51,8 @@ export function App() {
     const [resumeEducationList, setResumeEducationList] = useState([]);
     const [resumeExperienceList, setResumeExperienceList] = useState([]);
 
-    useEffect(() => {
-        console.log(resumeEducationList);
-    }, [resumeEducationList]);
+    const [educationDropdownOpen, setEducationDropdownOpen] = useState(false);
+    const [experienceDropdownOpen, setExperienceDropdownOpen] = useState(false);
 
     function resetMenuList(id, stateList) {
         if (stateList === 'education') {
@@ -305,6 +304,10 @@ export function App() {
                     menuList={educationMenuList}
                     formToggle={educationFormToggle}
                     setFormToggle={setEducationFormToggle}
+                    setOtherDropDownOpen={setExperienceDropdownOpen}
+                    dropDownOpen={educationDropdownOpen}
+                    setDropdownOpen={setEducationDropdownOpen}
+
 
                 />
                 <Dropdown
@@ -313,6 +316,9 @@ export function App() {
                     menuList={experienceMenuList}
                     formToggle={experienceFormToggle}
                     setFormToggle={setExperienceFormToggle}
+                    setOtherDropDownOpen={setEducationDropdownOpen}
+                    dropDownOpen={experienceDropdownOpen}
+                    setDropdownOpen={setExperienceDropdownOpen}
 
                 />
 

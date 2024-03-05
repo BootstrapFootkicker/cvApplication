@@ -29,9 +29,9 @@ export function ResumeLeft({fullName, email, phone, address}) {
                 </div>
 
                 <div className={'links-div'}>
-                    <span><div><FontAwesomeIcon icon={phoneIcon}/></div>
+                    <span className={'link-info'}><div><FontAwesomeIcon icon={phoneIcon}/></div>
                         {phone}</span>
-                    <span><div><FontAwesomeIcon icon={emailIcon}/></div>
+                    <span className={'link-info'}><div><FontAwesomeIcon icon={emailIcon}/></div>
                         {email}</span>
 
                 </div>

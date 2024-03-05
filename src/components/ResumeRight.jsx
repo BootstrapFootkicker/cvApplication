@@ -28,11 +28,7 @@ export function ResumeRight({educationMenuList, experienceMenuList}) {
                                         {item.elementInfo.formInfo ? item.elementInfo.formInfo.schoolLocation : ""}
                                     </div>
                                 </div>
-
-                                <div className={'styled-separator'}>
-
-                                    |
-                                </div>
+                                
                                 <div className={'job-info-div'}>
                                     <h1 className={'school-name'}>
                                         {item.elementInfo.name}

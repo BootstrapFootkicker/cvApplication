@@ -12,10 +12,18 @@ export function Dropdown({
                              menuList,
                              formToggle,
                              setFormToggle,
+                             dropDownOpen,
+                             setOtherDropDownOpen,
+                             setDropdownOpen,
+
                          }) {
     const [open, setOpen] = useState(false);
 
-    const toggle = () => setOpen(!open);
+    // const toggle = () => setOpen(!open);
+    const toggle = () => {
+        setDropdownOpen(!dropDownOpen)
+        setOtherDropDownOpen(false)
+    };
 
     return (
         <div className={"dropdown"}>
@@ -32,7 +40,7 @@ export function Dropdown({
                     </div>
                 </div>
             </button>
-            {open ? (
+            {dropDownOpen ? (
                 <MenuList
                     menuList={menuList}
                     sectionName={sectionName}
